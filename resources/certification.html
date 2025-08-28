@@ -1,48 +1,187 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Syne"/>
     <!-- Font Awesome for social media icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
     <title>Certification - Anele Simbela</title>
-    <header>
-    <div class="image-container">
-        <img
-          src="/img/ANELE.Simbela.profile.png"
-          class="w3-margin"
-          alt="Person"
-          max-width="100%"
-          height="150px"
-          style="border-radius: 50%"
-        />
-      </div></header> 
-    
-  </head>
-  <body class="w3-white">
+    <style>
+        body {
+            font-family: 'Syne', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .image-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .content-container {
+            background: rgba(255, 255, 255, 0.1);
+           
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .certification-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .certification-item {
+            background: rgba(255, 255, 255, 0.2);
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #FFD700;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .certification-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cert-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .cert-description {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: white;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: background 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            text-decoration: none;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 1.5em;
+            margin: 0 15px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: #FFD700;
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+
+<body >
     <div class="container">
-      <div class="content-container">
-        <h2 class="w3-text-white">Certifications</h2>
-        <p class="w3-text-white w3-large"><strong>Anele Simbela</strong></p>
-        <ul class="w3-text-white w3-left-align" style="max-width: 600px; margin: auto;">
-          <li>CompTIA Security+</li>
-          <li>Azure Developer Associate (AZ-204)</li>
-          <li>Power Platform Fundamentals (PL-900)</li>
-          <li>Azure Fundamentals (AZ-900)</li>
-          <li>AgilePM Foundation</li>
-        </ul>
-      </div>
+        <!-- Header with profile image -->
+        <header class="image-container">
+            <img 
+                src="/img/ANELE.Simbela.profile.png" 
+                class="w3-margin" 
+                alt="Anele Simbela" 
+                style="width: 150px; height: 150px; border-radius: 50%; border: 4px solid white; box-shadow: 0 4px 15px rgba(0,0,0,0.3);" 
+            />
+        </header>
+
+        <!-- Back to main page link -->
+        <a href="/index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Back to Portfolio
+        </a>
+
+        <!-- Main content -->
+        <div class="content-container">
+            <h2 class="w3-text-white w3-center" style="margin-bottom: 10px;">Professional Certifications</h2>
+            <p class="w3-text-white w3-center w3-large" style="margin-bottom: 30px;"><strong>Anele Simbela</strong></p>
+            
+            <ul class="certification-list">
+                <li class="certification-item">
+                    <div class="cert-title w3-text-white">
+                        <i class="fas fa-shield-alt" style="color: #FFD700; margin-right: 10px;"></i>
+                        CompTIA Security+
+                    </div>
+                    <div class="cert-description w3-text-white">
+                        Industry-standard certification covering cybersecurity fundamentals, risk management, and security protocols.
+                    </div>
+                </li>
+                
+                <li class="certification-item">
+                    <div class="cert-title w3-text-white">
+                        <i class="fab fa-microsoft" style="color: #FFD700; margin-right: 10px;"></i>
+                        Azure Developer Associate (AZ-204)
+                    </div>
+                    <div class="cert-description w3-text-white">
+                        Advanced certification demonstrating expertise in developing cloud applications and services on Microsoft Azure.
+                    </div>
+                </li>
+                
+                <li class="certification-item">
+                    <div class="cert-title w3-text-white">
+                        <i class="fas fa-cloud" style="color: #FFD700; margin-right: 10px;"></i>
+                        Power Platform Fundamentals (PL-900)
+                    </div>
+                    <div class="cert-description w3-text-white">
+                        Foundation certification covering Microsoft Power Platform tools including Power Apps, Power BI, and Power Automate.
+                    </div>
+                </li>
+                
+                <li class="certification-item">
+                    <div class="cert-title w3-text-white">
+                        <i class="fas fa-cloud-upload-alt" style="color: #FFD700; margin-right: 10px;"></i>
+                        Azure Fundamentals (AZ-900)
+                    </div>
+                    <div class="cert-description w3-text-white">
+                        Entry-level certification covering core Azure services, security, privacy, compliance, and pricing.
+                    </div>
+                </li>
+                
+                <li class="certification-item">
+                    <div class="cert-title w3-text-white">
+                        <i class="fas fa-project-diagram" style="color: #FFD700; margin-right: 10px;"></i>
+                        AgilePM Foundation
+                    </div>
+                    <div class="cert-description w3-text-white">
+                        Certification in Agile Project Management methodology, covering principles, practices, and frameworks.
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
-    <footer class="w3-container w3-center w3-padding-48 w3-margin-top">
-      <div class="social-icons">
-        <a href="https://www.linkedin.com/in/simbela-anele-2202b9349" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-        <a href="mailto:anelefabricado@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-      </div>
+
+    <!-- Footer -->
+    <footer class="w3-container w3-center w3-padding-48">
+        <div class="social-icons">
+            <a href="https://www.linkedin.com/in/simbela-anele-2202b9349" target="_blank" aria-label="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="mailto:anelefabricado@gmail.com" aria-label="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
     </footer>
-  </body>
+</body>
 </html>
- 
