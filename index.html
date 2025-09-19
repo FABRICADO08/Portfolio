@@ -46,7 +46,11 @@
 
     <!-- Blog entry. Change the text and link to your most recent post. -->
     <div class="w3-content w3-padding-32 w3-center" style="padding-right: 10px; padding-left: 10px; max-width: 600px">
-      <h5 class="w3-text-white">Last Updated, ${process.env.BUILD_DATE || new Date().toLocaleDateString('en-GB')}</h5>
+     <h5 class="w3-text-white">Last Updated, <span id="build-date"></span></h5>
+
+<script>
+document.getElementById('build-date').textContent = new Date().toLocaleDateString('en-GB');
+</script>
      
       <div class="w3-row">
       <!-- Footer. This section contains an ad for W3Schools Spaces. You can leave it to support us. -->
