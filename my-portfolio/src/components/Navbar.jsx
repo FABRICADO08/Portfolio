@@ -23,28 +23,38 @@ return (
             Home
           </NavLink>
           <NavLink
+            to="/about"
+            className="hover:text-blue-400 transition"
+          >
+            About
+          </NavLink>
+          <NavLink
             to="/timeline"
             className={({ isActive }) =>
               isActive ? "text-blue-400" : "hover:text-blue-400 transition"
             }
-          >
+          >            
             Timeline
           </NavLink>
           <NavLink
-            to="#projects"
+            to="/projects"
             className="hover:text-blue-400 transition"
           >
             Projects
           </NavLink>
           <NavLink
-            to="#contact"
+            to="/skills"
             className="hover:text-blue-400 transition"
           >
+            Skills
+          </NavLink>
+          <NavLink
+            to="/contact"
+            className="hover:text-blue-400 transition"
+          >
+            
             Contact
           </NavLink>
-<a href="#about" className="hover:text-blue-400">About</a>
-<a href="#projects" className="hover:text-blue-400">Projects</a>
-<a href="#contact" className="hover:text-blue-400">Contact</a>
 </div> 
 </nav>
 </header>

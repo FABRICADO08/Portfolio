@@ -3,7 +3,7 @@ import { Linkedin, Mail } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="w-full flex flex-col items-center justify-center py-12 mt-8 border-t border-gray-100">
+    <footer className="w-full flex flex-col items-center justify-center py-3 mt-4 border-t border-gray-100">
       <div className="flex space-x-6">
         {/* LinkedIn Link */}
         <a
@@ -27,7 +27,7 @@ const Footer = () => {
       </div>
       
       {/* Optional: Add a small copyright or text like the original */}
-      <p className="mt-4 text-sm text-gray-400">
+      <p className="mt-4 text-sm text-gray-200">
         &copy; {new Date().getFullYear()} Anele Simbela
       </p>
     </footer>

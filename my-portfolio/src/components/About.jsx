@@ -1,3 +1,4 @@
+import React from 'react';
 export default function About() {
 return (
 <section id="about" className="max-w-6xl mx-auto py-24 px-4 grid md:grid-cols-2 gap-8">
