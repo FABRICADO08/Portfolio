@@ -3,7 +3,7 @@ const skills = ['HTML', 'CSS', 'JavaScript', 'React', 'Tailwind', 'Mendix', 'RES
 
 export default function Skills() {
 return (
-<section className="bg-slate-900 py-24">
+<section className="pt-32 pb-20 bg-gray-950 text-gray-100">
 <div className="max-w-6xl mx-auto px-4">
 <h2 className="text-3xl font-bold mb-8">Skills</h2>
 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">

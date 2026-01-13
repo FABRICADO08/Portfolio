@@ -1,6 +1,6 @@
 export default function Contact() {
 return (
-<section id="contact" className="bg-slate-900 py-24">
+<section id="contact" className="pt-32 pb-20 bg-gray-950 text-gray-100">
 <div className="max-w-xl mx-auto px-4">
 <h2 className="text-3xl font-bold mb-8">Contact Me</h2>
 <form name="contact" method="POST" data-netlify="true" className="space-y-4">

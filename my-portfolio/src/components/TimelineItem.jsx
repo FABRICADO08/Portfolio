@@ -3,11 +3,11 @@ import React from 'react';
 
 const Timeline = () => {
   return (
-    <section id="timeline" className="py-20 bg-gray-950 text-gray-100">
+    <section id="timeline" className="pt-32 pb-20 bg-gray-950 text-gray-100">
       <div className="max-w-4xl mx-auto px-6">
 
-        <h1 className="text-4xl md:text-5xl font-bold text-center mb-2">
-          Anele Simbela
+        <h1 className="text-4xl md:text-3xl font-bold text-center mb-2">
+          Education & Professional Certifications
         </h1>
         <p className="text-center text-gray-400 text-xl mb-16">
           Education & Professional Certifications
@@ -15,11 +15,7 @@ const Timeline = () => {
 
         {/* Timeline container */}
         <div className="relative pl-8 md:pl-16">
-
-          {/* Vertical line */}
-          <div className="absolute left-4 md:left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-600 to-blue-400 rounded-full"></div>
-
-          {/* Education Item */}
+    
           <div className="mb-16 relative">
             <div className="ml-12 md:ml-16 bg-gray-800 p-6 rounded-xl border-l-4 border-blue-500 shadow-md">
               <h3 className="text-2xl font-semibold text-blue-400 mb-2">
@@ -40,11 +36,11 @@ const Timeline = () => {
           </h2>
 
           {/* Certifications */}
-          <div className="space-y-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
             <div className="relative">
               
-              <div className="ml-10 md:ml-14 bg-gray-800 p-6 rounded-xl shadow-md">
+              <div className="bg-gray-800 p-6 rounded-xl shadow-md flex flex-col items-center text-center">
                         <img
                          src="/img/SecurityPlus Logo Certified CE.png"
 
@@ -58,7 +54,7 @@ const Timeline = () => {
             </div>
 
             <div className="relative">
-              <div className="ml-10 md:ml-14 bg-gray-800 p-6 rounded-xl shadow-md">
+              <div className="bg-gray-800 p-6 rounded-xl shadow-md flex flex-col items-center text-center">
                 <img
                                 src="/img/azure-developer-associate-600x600.png"
 
@@ -72,7 +68,7 @@ const Timeline = () => {
             </div>
 
             <div className="relative">
-              <div className="ml-10 md:ml-14 bg-gray-800 p-6 rounded-xl shadow-md">
+              <div className="bg-gray-800 p-6 rounded-xl shadow-md flex flex-col items-center text-center">
                 <img
                                 src="/img/CERT-Fundamentals-Power-Platform.png"
 
@@ -86,7 +82,7 @@ const Timeline = () => {
             </div>
 
             <div className="relative">
-              <div className="ml-10 md:ml-14 bg-gray-800 p-6 rounded-xl shadow-md">
+              <div className="bg-gray-800 p-6 rounded-xl shadow-md flex flex-col items-center text-center">
                 <img
                                 src="/img/AZ-900.png"
 
@@ -100,7 +96,7 @@ const Timeline = () => {
             </div>
 
             <div className="relative">
-              <div className="ml-10 md:ml-14 bg-gray-800 p-6 rounded-xl shadow-md">
+              <div className="bg-gray-800 p-6 rounded-xl shadow-md flex flex-col items-center text-center">
                 <img
                                 src="/img/Rapid-min.png"
 
@@ -114,7 +110,7 @@ const Timeline = () => {
             </div>
 
             <div className="relative">
-              <div className="ml-10 md:ml-14 bg-gray-800 p-6 rounded-xl shadow-md">
+              <div className="bg-gray-800 p-6 rounded-xl shadow-md flex flex-col items-center text-center">
                 <img
                                 src="/img/Agile_Project_Management_Foundation__600PX.png"
 

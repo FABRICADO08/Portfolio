@@ -3,7 +3,7 @@ import { Linkedin, Mail } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="w-full flex flex-col items-center justify-center py-3 mt-4 border-t border-gray-100">
+    <footer className="fixed bottom-0 w-full bg-gray-950 text-gray-100 flex flex-col items-center justify-center py-3 mt-4 border-t border-gray-100">
       <div className="flex space-x-6">
         {/* LinkedIn Link */}
         <a

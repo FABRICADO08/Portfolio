@@ -11,19 +11,17 @@ import { Routes,Route,Navigate } from 'react-router-dom'
 
 export default function App() {
 return (
-<div>
-<Navbar />
-        <main><Routes>
+<div className="min-h-screen flex flex-col">
+
+        <Navbar />
+        
+        <main className="flex-grow"><Routes>
             <Route
             path="/"
             element={
               <>
                 <Hero />
-                <About />
-                <Skills />
-                <Projects />
-                <Timeline/>
-                <Contact />
+                
                 </>
             }
             />

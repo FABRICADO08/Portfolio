@@ -1,7 +1,7 @@
 import React from 'react';
 export default function About() {
 return (
-<section id="about" className="max-w-6xl mx-auto py-24 px-4 grid md:grid-cols-2 gap-8">
+<section id="about" className="max-w-6xl mx-auto py-24 px-4 grid md:grid-cols-2 gap-8 pt-30 pb-10 bg-gray-950 text-gray-100">
 <img src="/images/profile.jpg" className="rounded-xl" />
 <div>
 <h2 className="text-3xl font-bold mb-4">About Me</h2>
