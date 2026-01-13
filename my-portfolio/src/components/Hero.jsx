@@ -1,5 +1,3 @@
-import About from './components/About'
-import Contact from './components/Contact'
 export default function Hero() {
 return (
 <section className="min-h-screen flex flex-col justify-center items-center text-center px-4">
@@ -10,7 +8,6 @@ I build scalable, secure, and user‑friendly applications using modern web and 
 <div className="space-x-4">
 <a href="#projects" className="bg-blue-600 px-6 py-3 rounded-lg">View Projects</a>
 <a href="#contact" className="border border-blue-600 px-6 py-3 rounded-lg">Contact Me</a>
-
 </div>
 </section>
 )
