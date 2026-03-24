@@ -1,19 +1,31 @@
-const skills = ['HTML', 'CSS', 'JavaScript', 'React', 'Tailwind', 'Mendix', 'REST APIs']
+import { useState, useEffect } from 'react'
 
+const fallbackSkills = ['HTML', 'CSS', 'JavaScript', 'React', 'Tailwind', 'Mendix', 'REST APIs']
 
 export default function Skills() {
-return (
-<section className="pt-32 pb-20 bg-gray-950 text-gray-100">
-<div className="max-w-6xl mx-auto px-4">
-<h2 className="text-3xl font-bold mb-8">Skills</h2>
-<div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-{skills.map(skill => (
-<div key={skill} className="bg-slate-800 p-4 rounded-lg text-center">
-{skill}
-</div>
-))}
-</div>
-</div>
-</section>
-)
+  const [skills, setSkills] = useState(fallbackSkills)
+
+  useEffect(() => {
+    fetch('/api/skills')
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) setSkills(data)
+      })
+      .catch(() => {})
+  }, [])
+
+  return (
+    <section className="pt-32 pb-20 bg-gray-950 text-gray-100">
+      <div className="max-w-6xl mx-auto px-4">
+        <h2 className="text-3xl font-bold mb-8">Skills</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {skills.map((skill) => (
+            <div key={skill} className="bg-slate-800 p-4 rounded-lg text-center">
+              {skill}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
 }
