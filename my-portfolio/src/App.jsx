@@ -6,6 +6,7 @@ import Projects from './components/Projects'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import Timeline from './components/TimelineItem'
+import AdminDashboard from './components/admin/AdminDashboard'
 import { Routes,Route,Navigate } from 'react-router-dom'
 
 
@@ -14,14 +15,14 @@ return (
 <div className="min-h-screen flex flex-col">
 
         <Navbar />
-        
+
         <main className="flex-grow"><Routes>
             <Route
             path="/"
             element={
               <>
                 <Hero />
-                
+
                 </>
             }
             />
@@ -30,6 +31,7 @@ return (
             <Route path="/projects" element={<Projects />} />
             <Route path="/skills" element={<Skills />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/admin" element={<AdminDashboard />} />
             <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
 </main>

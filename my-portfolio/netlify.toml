@@ -1,0 +1,8 @@
+[functions]
+  directory = "netlify/functions"
+
+# SPA fallback — must be last
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
