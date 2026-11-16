@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { login, logout, getUser, handleAuthCallback } from '@netlify/identity'
+import { login, getUser, handleAuthCallback } from '@netlify/identity'
 
 export default function AdminLogin({ onLogin }) {
   const [email, setEmail] = useState('')

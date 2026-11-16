@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /__forms.html
+Sitemap: https://afsportfolio.netlify.app/sitemap.xml
