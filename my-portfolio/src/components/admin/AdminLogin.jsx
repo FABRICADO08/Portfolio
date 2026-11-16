@@ -1,28 +1,23 @@
-import { useState, useEffect } from 'react'
-import { login, getUser, handleAuthCallback } from '@netlify/identity'
+import { useState } from 'react'
+import { getSettings, oauthLogin, logout } from '@netlify/identity'
 
-export default function AdminLogin({ onLogin }) {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+export default function AdminLogin({ user, authError }) {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
-    handleAuthCallback().catch(() => {})
-    getUser().then((user) => {
-      if (user) onLogin(user)
-    })
-  }, [onLogin])
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  async function signIn() {
     setLoading(true)
     setError('')
     try {
-      const user = await login(email, password)
-      onLogin(user)
-    } catch (err) {
-      setError(err.status === 401 ? 'Invalid email or password.' : err.message)
+      const settings = await getSettings()
+      if (!settings.providers?.google) {
+        setError('Google sign-in is not available yet. Please try again once it is enabled.')
+        return
+      }
+      if (user) await logout()
+      oauthLogin('google')
+    } catch {
+      setError('Google sign-in could not be started. Please try again.')
     } finally {
       setLoading(false)
     }
@@ -31,41 +26,15 @@ export default function AdminLogin({ onLogin }) {
   return (
     <div className="min-h-screen bg-gray-950 flex items-center justify-center px-4">
       <div className="bg-gray-800 rounded-xl p-8 w-full max-w-md shadow-xl">
-        <h1 className="text-2xl font-bold text-white mb-6 text-center">Admin Login</h1>
-        {error && (
-          <div className="bg-red-500/20 border border-red-500 text-red-300 rounded-lg p-3 mb-4 text-sm">
-            {error}
-          </div>
-        )}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-gray-300 text-sm mb-1">Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full bg-gray-700 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-gray-300 text-sm mb-1">Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full bg-gray-700 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition disabled:opacity-50"
-          >
-            {loading ? 'Signing in...' : 'Sign In'}
-          </button>
-        </form>
+        <h1 className="text-2xl font-bold text-white mb-4 text-center">Admin sign-in</h1>
+        <p className="text-gray-300 mb-6">Sign in with the portfolio owner’s Google account to manage this portfolio.</p>
+        {user && <p className="text-gray-300 mb-4" role="status">This account does not have access. Continue with the owner’s Google account.</p>}
+        {(error || authError) && <p role="alert" className="bg-red-500/20 border border-red-500 text-red-300 rounded-lg p-3 mb-4 text-sm">{error || authError}</p>}
+        <button type="button" onClick={signIn} disabled={loading} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition disabled:opacity-50">
+          {loading ? 'Connecting…' : 'Continue with Google'}
+        </button>
+        <p className="text-gray-400 text-sm mt-4">Your admin link appears automatically while you stay signed in.</p>
+        <a href="/" className="text-blue-300 inline-block mt-4">Back to portfolio</a>
       </div>
     </div>
   )

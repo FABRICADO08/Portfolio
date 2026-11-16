@@ -1,5 +1,6 @@
 import { getStore } from '@netlify/blobs'
 import { getUser } from '@netlify/identity'
+import { isPortfolioOwner } from '../../src/auth/admin-access.mjs'
 import type { Config, Context } from '@netlify/functions'
 
 export default async (req: Request, context: Context) => {
@@ -13,6 +14,7 @@ export default async (req: Request, context: Context) => {
   if (req.method === 'PUT') {
     const user = await getUser()
     if (!user) return new Response('Unauthorized', { status: 401 })
+  if (!isPortfolioOwner(user)) return new Response('Forbidden', { status: 403 })
 
     const skills = await req.json()
     await store.setJSON('skills', skills)

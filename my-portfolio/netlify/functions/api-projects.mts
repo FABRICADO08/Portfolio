@@ -1,5 +1,6 @@
 import { getStore } from '@netlify/blobs'
 import { getUser } from '@netlify/identity'
+import { isPortfolioOwner } from '../../src/auth/admin-access.mjs'
 import { asc, eq } from 'drizzle-orm'
 import type { Config } from '@netlify/functions'
 import { db } from '../../db/index.js'
@@ -10,9 +11,7 @@ export default async (req: Request) => {
   if (req.method === 'PUT') {
     const user = await getUser()
     if (!user) return Response.json({ error: 'Please sign in again before saving.' }, { status: 401 })
-    // Keep the portfolio owner's existing account usable without opening writes to other members.
-    const owner = user.confirmedAt && user.email?.toLowerCase() === 'anelefabricado@gmail.com'
-    if (!owner && !user.roles?.includes('admin')) return Response.json({ error: 'Only the portfolio owner or an administrator can manage projects.' }, { status: 403 })
+    if (!isPortfolioOwner(user)) return Response.json({ error: 'Only the portfolio owner can manage projects.' }, { status: 403 })
     const text = await req.text()
     if (new TextEncoder().encode(text).length > 1_000_000) return Response.json({ error: 'Project collection is too large.' }, { status: 413 })
     let records
