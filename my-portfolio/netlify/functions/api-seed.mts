@@ -1,5 +1,6 @@
 import { getStore } from '@netlify/blobs'
 import { getUser } from '@netlify/identity'
+import { isPortfolioOwner } from '../../src/auth/admin-access.mjs'
 import type { Config, Context } from '@netlify/functions'
 
 const defaultProjects = [
@@ -79,6 +80,7 @@ const defaultCertifications = [
 export default async (req: Request, context: Context) => {
   const user = await getUser()
   if (!user) return new Response('Unauthorized', { status: 401 })
+  if (!isPortfolioOwner(user)) return new Response('Forbidden', { status: 403 })
 
   const store = getStore({ name: 'portfolio-data', consistency: 'strong' })
 

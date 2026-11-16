@@ -1,23 +1,18 @@
-import { useState, useCallback } from 'react'
+import { useState } from 'react'
 import { logout } from '@netlify/identity'
+import { isPortfolioOwner } from '../../auth/admin-access.mjs'
 import AdminLogin from './AdminLogin'
 import ProjectsManager from './ProjectsManager'
 import SkillsManager from './SkillsManager'
 import CertificationsManager from './CertificationsManager'
 
-export default function AdminDashboard() {
-  const [user, setUser] = useState(null)
+export default function AdminDashboard({ user, authReady, authError }) {
   const [activeTab, setActiveTab] = useState('projects')
   const [seeding, setSeeding] = useState(false)
   const [seedMessage, setSeedMessage] = useState('')
 
-  const handleLogin = useCallback((loggedInUser) => {
-    setUser(loggedInUser)
-  }, [])
-
   const handleLogout = async () => {
-    await logout()
-    setUser(null)
+    try { await logout() } catch { setSeedMessage('Sign-out failed. Please try again.') }
   }
 
   const handleSeed = async () => {
@@ -43,7 +38,8 @@ export default function AdminDashboard() {
     }
   }
 
-  if (!user) return <AdminLogin onLogin={handleLogin} />
+  if (!authReady) return <p className="content-width pt-28" role="status">Checking your session…</p>
+  if (!isPortfolioOwner(user)) return <AdminLogin user={user} authError={authError} />
 
   const tabs = [
     { key: 'projects', label: 'Projects bucket' },
