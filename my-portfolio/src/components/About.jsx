@@ -1,15 +1,3 @@
-import React from 'react';
 export default function About() {
-return (
-<section id="about" className="max-w-6xl mx-auto py-24 px-4 grid md:grid-cols-2 gap-8 pt-30 pb-10 bg-gray-950 text-gray-100">
-<img src="/images/profile.jpg" className="rounded-xl" />
-<div>
-<h2 className="text-3xl font-bold mb-4">About Me</h2>
-<p className="text-slate-300">
-I’m a passionate developer with experience in web development and Mendix low‑code platforms.
-I enjoy solving problems and building clean, maintainable solutions.
-</p>
-</div>
-</section>
-)
+return <section id="about" className="section content-width"><p className="eyebrow">Background</p><h2>From Bizana, building with purpose.</h2><div className="reading-copy"><p>I’m Anele Simbela, from Bizana in the Eastern Cape. I graduated from the University of Fort Hare with a BSc in Computer Science and Physics in May 2023, and I’m currently studying towards Honours in Computing at the University of South Africa (UNISA).</p><p>I joined Mercedes-Benz South Africa in July 2023 as an external intern through NetCampus, continuing until July 2024. I became an internal intern in August 2024 and continued in that role until January 2026. Since February 2026, I’ve been a Graduate Trainee at Mercedes-Benz South Africa.</p><p>My technical experience includes Mendix, React, TypeScript, JavaScript, HTML, CSS, Azure, Docker and PostgreSQL. I’m interested in using software to address practical problems and contribute to my community.</p><a href="/timeline">View my experience and education ↗</a></div></section>
 }

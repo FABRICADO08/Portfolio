@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback } from 'react'
-import { logout, getUser } from '@netlify/identity'
+import { useState, useCallback } from 'react'
+import { logout } from '@netlify/identity'
 import AdminLogin from './AdminLogin'
 import ProjectsManager from './ProjectsManager'
 import SkillsManager from './SkillsManager'
@@ -46,7 +46,7 @@ export default function AdminDashboard() {
   if (!user) return <AdminLogin onLogin={handleLogin} />
 
   const tabs = [
-    { key: 'projects', label: 'Projects' },
+    { key: 'projects', label: 'Projects bucket' },
     { key: 'skills', label: 'Skills' },
     { key: 'certifications', label: 'Certifications' },
   ]

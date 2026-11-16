@@ -1,41 +1,28 @@
 import { useState, useEffect } from 'react'
 import ProjectCard from './ProjectCard'
 
-const fallbackProjects = [
-  {
-    id: '1',
-    image: '/images/project-budget-tracker.png',
-    title: 'Budget Tracker',
-    tech: 'React, Firebase',
-    live: '#',
-    github: '#',
-  },
-  {
-    id: '2',
-    image: '/images/project-mendix-app.png',
-    title: 'Mendix Business App',
-    tech: 'Mendix, REST APIs',
-    live: '#',
-    github: '#',
-  },
-]
-
 export default function Projects() {
-  const [projects, setProjects] = useState(fallbackProjects)
+  const [projects, setProjects] = useState([])
+  const [status, setStatus] = useState('loading')
 
   useEffect(() => {
     fetch('/api/projects')
-      .then((res) => res.json())
+      .then((res) => { if (!res.ok) throw new Error('Projects unavailable'); return res.json() })
       .then((data) => {
-        if (Array.isArray(data) && data.length > 0) setProjects(data)
+        if (!Array.isArray(data)) throw new Error('Invalid project data')
+        setProjects(data)
+        setStatus('ready')
       })
-      .catch(() => {})
+      .catch(() => setStatus('error'))
   }, [])
 
   return (
-    <section id="projects" className="PX-2 pt-30 pb-10 bg-gray-950 text-gray-100">
-      <h2 className="text-3xl font-bold mb-8 flex justify-center text-center">Projects</h2>
-      <div className="grid md:grid-cols-3 gap-8">
+    <section id="projects" className="section content-width">
+      <p className="eyebrow">Application development</p><h2>Projects &amp; technical work</h2><p className="section-intro">Explore the technologies and applications behind my development work. Contact me to discuss my contribution and implementation decisions.</p>
+      {status === 'loading' && <p role="status">Loading projects…</p>}
+      {status === 'error' && <p role="alert">Projects could not be loaded. Please refresh or contact me for details.</p>}
+      {status === 'ready' && projects.length === 0 && <p>Project case studies are being prepared. <a href="/contact">Contact me to discuss my work.</a></p>}
+      <div className="project-grid">
         {projects.map((project) => (
           <ProjectCard
             key={project.id}
@@ -44,6 +31,7 @@ export default function Projects() {
             tech={project.tech}
             live={project.live}
             github={project.github}
+            description={project.description}
           />
         ))}
       </div>

@@ -1,15 +1,8 @@
-export default function ProjectCard({ image, title, tech, live, github }) {
-return (
-<div className="bg-slate-800 rounded-xl overflow-hidden">
-<img src={image} />
-<div className="p-4">
-<h3 className="font-bold text-xl mb-2">{title}</h3>
-<p className="text-slate-400 mb-4">{tech}</p>
-<div className="space-x-4">
-<a href={live} className="text-blue-400">Live</a>
-<a href={github} className="text-blue-400">GitHub</a>
-</div>
-</div>
-</div>
-)
+import { useState } from 'react'
+const webLink = (value) => { try { return ['https:', 'http:'].includes(new URL(value).protocol) } catch { return false } }
+export default function ProjectCard({ image, title, tech, live, github, description }) {
+const [failed, setFailed] = useState(false)
+return <article className="project-card">
+{image && !failed && <img src={image} alt={`${title} application preview`} loading="lazy" width="640" height="360" onError={()=>setFailed(true)} />}
+<div className="project-body"><p className="eyebrow">{tech}</p><h3>{title}</h3>{description && <p>{description}</p>}<div className="actions">{webLink(live) && <a href={live} aria-label={`View ${title} live demo`}>Live demo ↗</a>}{webLink(github) && <a href={github} aria-label={`Read ${title} source code`}>Source code ↗</a>}</div>{!webLink(live) && !webLink(github) && <p className="muted">Demo and source links are not yet published.</p>}</div></article>
 }
