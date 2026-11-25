@@ -5,14 +5,10 @@ const stackLogo = {
   React: 'react',
   TypeScript: 'typescript',
   Vite: 'vite',
-  FullCalendar: 'fullcalendar',
-  'Microsoft 365': 'microsoftoffice',
   Mendix: 'mendix',
   Java: 'openjdk',
-  'REST APIs': 'fastapi',
   JavaScript: 'javascript',
-  SQL: 'postgresql',
-  Agile: 'jira',
+  PostgreSQL: 'postgresql',
 }
 
 const logoUrl = (technology) => {
@@ -40,7 +36,7 @@ export default function ProjectCard({ image, title, tech, live, github, descript
         {image ? (
           <img src={image} alt={`${title} project preview`} loading="lazy" width="640" height="360" />
         ) : (
-          <div className="project-placeholder" aria-label="Project preview not available">
+          <div className="project-placeholder" role="img" aria-label={`${title} preview is not available`}>
             <span aria-hidden="true">{(title || 'P').slice(0, 1).toUpperCase()}</span>
             <small>Project overview</small>
           </div>
