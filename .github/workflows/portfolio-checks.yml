@@ -16,8 +16,8 @@ permissions:
   contents: read
 
 jobs:
-  build:
-    name: Build React portfolio
+  quality:
+    name: Lint and build React portfolio
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -33,5 +33,7 @@ jobs:
           cache-dependency-path: my-portfolio/package-lock.json
       - name: Install dependencies
         run: npm ci
+      - name: Run ESLint
+        run: npm run lint
       - name: Build production bundle
         run: npm run build
