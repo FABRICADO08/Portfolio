@@ -6,103 +6,85 @@ import ProjectsManager from './ProjectsManager'
 import SkillsManager from './SkillsManager'
 import CertificationsManager from './CertificationsManager'
 
+const tabs = [
+  { key: 'projects', label: 'Projects', description: 'Case studies and source links' },
+  { key: 'skills', label: 'Skills', description: 'Your technical toolkit' },
+  { key: 'certifications', label: 'Certifications', description: 'Credentials and learning' },
+]
+
 export default function AdminDashboard({ user, authReady, authError }) {
   const [activeTab, setActiveTab] = useState('projects')
   const [seeding, setSeeding] = useState(false)
   const [seedMessage, setSeedMessage] = useState('')
+  const [logoutError, setLogoutError] = useState('')
 
-  const handleLogout = async () => {
-    try { await logout() } catch { setSeedMessage('Sign-out failed. Please try again.') }
+  async function handleLogout() {
+    setLogoutError('')
+    try {
+      await logout()
+    } catch {
+      setLogoutError('Sign-out failed. Please try again.')
+    }
   }
 
-  const handleSeed = async () => {
+  async function handleSeed() {
     setSeeding(true)
     setSeedMessage('')
     try {
-      const res = await fetch('/api/seed', { method: 'POST' })
-      const data = await res.json()
-      if (data.success) {
-        const seeded = Object.entries(data.seeded)
-          .filter(([, v]) => v)
-          .map(([k]) => k)
-        setSeedMessage(
-          seeded.length > 0
-            ? `Seeded: ${seeded.join(', ')}. Refresh each tab to see the data.`
-            : 'All data already exists. Nothing was seeded.'
-        )
-      }
-    } catch {
-      setSeedMessage('Failed to seed data. Make sure you are logged in.')
+      const response = await fetch('/api/seed', { method: 'POST' })
+      const data = await response.json()
+      if (!response.ok || !data.success) throw new Error(data.error || 'Initial data could not be loaded.')
+      const seeded = Object.entries(data.seeded || {}).filter(([, value]) => value).map(([key]) => key)
+      setSeedMessage(seeded.length ? `Initial data added for: ${seeded.join(', ')}. Reload the relevant tab to see it.` : 'Your content is already set up. No changes were made.')
+    } catch (error) {
+      setSeedMessage(error.message || 'Could not load initial data. Check your connection and try again.')
     } finally {
       setSeeding(false)
     }
   }
 
-  if (!authReady) return <p className="content-width pt-28" role="status">Checking your session…</p>
+  if (!authReady) return <div className="admin-loading content-width" role="status"><span className="admin-spinner" /> Checking your secure session…</div>
   if (!isPortfolioOwner(user)) return <AdminLogin user={user} authError={authError} />
 
-  const tabs = [
-    { key: 'projects', label: 'Projects bucket' },
-    { key: 'skills', label: 'Skills' },
-    { key: 'certifications', label: 'Certifications' },
-  ]
-
   return (
-    <div className="min-h-screen bg-gray-950 text-gray-100 pt-28 pb-12 px-4">
-      <div className="max-w-5xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-          <div className="flex gap-3 items-center">
-            <span className="text-gray-400 text-sm">{user.email}</span>
-            <button
-              onClick={handleLogout}
-              className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm transition"
-            >
-              Logout
-            </button>
+    <section className="admin-shell">
+      <div className="admin-container">
+        <header className="admin-header">
+          <div>
+            <p className="eyebrow">Portfolio control centre</p>
+            <h1>Good to see you.</h1>
+            <p>Keep your work, skills and credentials up to date.</p>
           </div>
-        </div>
-
-        <div className="bg-gray-800/50 rounded-xl p-4 mb-6 flex items-center justify-between">
-          <p className="text-gray-300 text-sm">
-            First time? Seed the database with your existing portfolio data.
-          </p>
-          <button
-            onClick={handleSeed}
-            disabled={seeding}
-            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm transition disabled:opacity-50"
-          >
-            {seeding ? 'Seeding...' : 'Seed Initial Data'}
-          </button>
-        </div>
-        {seedMessage && (
-          <div className="bg-blue-500/20 border border-blue-500 text-blue-300 rounded-lg p-3 mb-6 text-sm">
-            {seedMessage}
+          <div className="admin-account">
+            <span className="admin-avatar" aria-hidden="true">{(user.email || 'A').slice(0, 1).toUpperCase()}</span>
+            <div className="admin-account-copy"><strong>Portfolio owner</strong><span>{user.email}</span></div>
+            <button type="button" className="button secondary admin-logout" onClick={handleLogout}>Sign out</button>
           </div>
-        )}
+        </header>
 
-        <div className="flex gap-2 mb-6">
+        {logoutError && <p className="admin-alert" role="alert">{logoutError}</p>}
+
+        <section className="admin-welcome" aria-label="Admin dashboard overview">
+          <div><span className="admin-status-dot" /> <strong>Content management</strong><p>Changes are saved to your live portfolio when you select Save.</p></div>
+          <button type="button" className="button secondary" onClick={handleSeed} disabled={seeding}>{seeding ? 'Checking setup…' : 'Set up initial content'}</button>
+        </section>
+        {seedMessage && <p className="admin-feedback" role="status" aria-live="polite">{seedMessage}</p>}
+
+        <nav className="admin-tabs" aria-label="Content management sections">
           {tabs.map((tab) => (
-            <button
-              key={tab.key}
-              onClick={() => setActiveTab(tab.key)}
-              className={`px-5 py-2 rounded-lg text-sm font-medium transition ${
-                activeTab === tab.key
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-800 text-gray-400 hover:text-white'
-              }`}
-            >
-              {tab.label}
+            <button key={tab.key} type="button" className={activeTab === tab.key ? 'admin-tab active' : 'admin-tab'} onClick={() => setActiveTab(tab.key)} aria-current={activeTab === tab.key ? 'page' : undefined}>
+              <span>{tab.label}</span><small>{tab.description}</small>
             </button>
           ))}
-        </div>
+        </nav>
 
-        <div className="bg-gray-800 rounded-xl p-6">
+        <div className="admin-panel">
           {activeTab === 'projects' && <ProjectsManager />}
           {activeTab === 'skills' && <SkillsManager />}
           {activeTab === 'certifications' && <CertificationsManager />}
         </div>
+        <footer className="admin-footer"><span>Private workspace · Only the portfolio owner can make changes</span><a href="/" target="_blank" rel="noopener noreferrer">Open public portfolio ↗</a></footer>
       </div>
-    </div>
+    </section>
   )
 }
