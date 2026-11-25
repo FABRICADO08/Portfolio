@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import { Link, Route, Routes, useLocation } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 import About from '../components/About'
@@ -24,10 +24,23 @@ const pageHeadings = {
   '/contact': 'Contact Anele',
 }
 
+function NotFound() {
+  return (
+    <section className="content-width timeline-page" aria-labelledby="not-found-title">
+      <div className="timeline-heading">
+        <p className="eyebrow">404 · Page not found</p>
+        <h1 id="not-found-title">This page isn’t here.</h1>
+        <p>The address may be incorrect, or the page may have moved. Head back to the portfolio home page.</p>
+        <Link to="/" className="button primary">Back to home <span aria-hidden="true">↗</span></Link>
+      </div>
+    </section>
+  )
+}
+
 export default function App() {
   const { pathname } = useLocation()
   useEffect(() => {
-    const [title, description] = pageMeta[pathname] || ['Portfolio', 'Explore Anele Simbela’s software development portfolio.']
+    const [title, description] = pageMeta[pathname] || ['Page not found', 'The requested page could not be found. Return to Anele Simbela’s portfolio home page.']
     document.title = `Anele Simbela | ${title} | South Africa`
     let tag = document.querySelector('meta[name="description"]')
     if (!tag) {
@@ -53,7 +66,7 @@ export default function App() {
           <Route path="/projects" element={<Projects />} />
           <Route path="/skills" element={<Skills />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />
