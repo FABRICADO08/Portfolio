@@ -1,0 +1,50 @@
+name: Deploy portfolio to Firebase Hosting
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "my-portfolio/**"
+      - "firebase.json"
+      - ".github/workflows/deploy-firebase.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  checks: read
+
+concurrency:
+  group: firebase-hosting-production
+  cancel-in-progress: true
+
+jobs:
+  build_and_deploy:
+    name: Build and deploy to Firebase
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: my-portfolio/package-lock.json
+
+      - name: Install dependencies
+        working-directory: my-portfolio
+        run: npm ci
+
+      - name: Build production website
+        working-directory: my-portfolio
+        run: npm run build
+
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          projectId: ${{ secrets.FIREBASE_PROJECT_ID }}
+          channelId: live
