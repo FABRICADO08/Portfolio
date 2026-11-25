@@ -1,5 +1,5 @@
 const enc = new TextEncoder()
-const clean = (value) => String(value ?? '').normalize('NFKD').replace(/[^\\x20-\\x7E]/g, ' ').replace(/\\\\/g, '\\\\\\\\').replace(/\\(/g, '\\\\(').replace(/\\)/g, '\\\\)')
+const clean = (value) => String(value ?? '').normalize('NFKD').replace(/[^\x20-\x7E]/g, ' ').replace(/\\/g, '\\\\').replace(/\(/g, '\\(').replace(/\)/g, '\\)')
 
 function makePdf(pages, pageLinks) {
   const objects = []
@@ -9,24 +9,30 @@ function makePdf(pages, pageLinks) {
   const regular = add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>')
   const bold = add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>')
   const pageIds = []
+
   pages.forEach((commands, index) => {
-    const stream = commands.join('\\n')
-    const streamId = add('<< /Length ' + enc.encode(stream).length + ' >>\\nstream\\n' + stream + '\\nendstream')
+    const stream = commands.join('\n')
+    const streamId = add('<< /Length ' + enc.encode(stream).length + ' >>\nstream\n' + stream + '\nendstream')
     const annotations = (pageLinks[index] || []).map((link) => add(
       '<< /Type /Annot /Subtype /Link /Rect [' + link.x + ' ' + (link.y - 3) + ' ' + (link.x + link.width) + ' ' + (link.y + link.size + 3) + '] /Border [0 0 0] /A << /S /URI /URI (' + clean(link.url) + ') >> >>'
     ))
     const annots = annotations.length ? ' /Annots [' + annotations.map((id) => id + ' 0 R').join(' ') + ']' : ''
     pageIds.push(add('<< /Type /Page /Parent ' + pageTree + ' 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 ' + regular + ' 0 R /F2 ' + bold + ' 0 R >> >> /Contents ' + streamId + ' 0 R' + annots + ' >>'))
   })
+
   objects[catalog - 1] = '<< /Type /Catalog /Pages ' + pageTree + ' 0 R >>'
   objects[pageTree - 1] = '<< /Type /Pages /Kids [' + pageIds.map((id) => id + ' 0 R').join(' ') + '] /Count ' + pageIds.length + ' >>'
-  let pdf = '%PDF-1.4\\n'
+
+  let pdf = '%PDF-1.4\n'
   const offsets = [0]
-  objects.forEach((object, i) => { offsets.push(enc.encode(pdf).length); pdf += (i + 1) + ' 0 obj\\n' + object + '\\nendobj\\n' })
+  objects.forEach((object, index) => {
+    offsets.push(enc.encode(pdf).length)
+    pdf += (index + 1) + ' 0 obj\n' + object + '\nendobj\n'
+  })
   const xref = enc.encode(pdf).length
-  pdf += 'xref\\n0 ' + (objects.length + 1) + '\\n0000000000 65535 f \\n'
-  offsets.slice(1).forEach((offset) => { pdf += String(offset).padStart(10, '0') + ' 00000 n \\n' })
-  pdf += 'trailer\\n<< /Size ' + (objects.length + 1) + ' /Root ' + catalog + ' 0 R >>\\nstartxref\\n' + xref + '\\n%%EOF'
+  pdf += 'xref\n0 ' + (objects.length + 1) + '\n0000000000 65535 f \n'
+  offsets.slice(1).forEach((offset) => { pdf += String(offset).padStart(10, '0') + ' 00000 n \n' })
+  pdf += 'trailer\n<< /Size ' + (objects.length + 1) + ' /Root ' + catalog + ' 0 R >>\nstartxref\n' + xref + '\n%%EOF'
   return new Blob([enc.encode(pdf)], { type: 'application/pdf' })
 }
 
@@ -36,6 +42,7 @@ export function generateCV({ profile, experience, education, projects, skills, c
   let page = []
   let links = []
   let y = 0
+
   const text = (value, x, top, size, isBold = false, color = '0.16 0.20 0.25') => {
     page.push(color + ' rg BT /' + (isBold ? 'F2' : 'F1') + ' ' + size + ' Tf ' + x + ' ' + top + ' Td (' + clean(value) + ') Tj ET')
   }
@@ -66,7 +73,7 @@ export function generateCV({ profile, experience, education, projects, skills, c
   }
   const space = (height) => { if (y - height < 52) newPage(false) }
   const wrap = (value, max = 105) => {
-    const words = String(value || '').split(/\\s+/)
+    const words = String(value || '').split(/\s+/)
     const lines = []
     let line = ''
     words.forEach((word) => {
