@@ -374,3 +374,17 @@ body {
   .project-card:hover .project-visual > img { transform:none; }
   .admin-spinner { animation:none; }
 }
+
+.admin-panel h2 { color:#f2f7ff; }
+.admin-panel input:not([type="hidden"]),.admin-panel textarea { border-color:#435a75!important; background:#091322!important; color:#f4f7fc!important; border-radius:7px!important; }
+.admin-panel input:focus,.admin-panel textarea:focus { outline:2px solid rgba(139,188,255,.22)!important; border-color:#8bbcff!important; }
+.admin-panel label { color:#d9e6f6!important; font-weight:650; }
+.admin-panel button { min-height:40px; }
+.admin-panel button:focus-visible,.admin-tabs button:focus-visible { outline:3px solid #fbbf24; outline-offset:3px; }
+.admin-panel .text-gray-400,.admin-panel .text-gray-300 { color:#a9b8cc!important; }
+.admin-panel .bg-gray-700 { border:1px solid var(--line); background:#142239!important; }
+.admin-panel .bg-gray-600 { background:#091322!important; }
+.admin-panel .bg-gray-800 { background:#101b2d!important; }
+.admin-panel .text-white { color:#f4f7fc!important; }
+.admin-panel .text-blue-300 { color:#b8d5fb!important; }
+.admin-panel .text-red-400 { color:#f0a5a5!important; }
