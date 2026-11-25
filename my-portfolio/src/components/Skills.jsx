@@ -1,7 +1,7 @@
 import { skills } from '../data/portfolioData'
 
 const groups = [
-  { title: 'Application development', items: ['Mendix', 'React', 'JavaScript', 'TypeScript', 'Kotlin', 'Jetpack Compose'] },
+  { title: 'Application development', items: ['Mendix', 'Java', 'React', 'JavaScript', 'TypeScript', 'Kotlin', 'Jetpack Compose'] },
   { title: 'Platforms & integration', items: ['Microsoft Azure', 'REST APIs', 'PostgreSQL', 'Docker'] },
   { title: 'Engineering practice', items: ['HTML', 'CSS', 'Git', 'Agile Project Management'] },
 ]
