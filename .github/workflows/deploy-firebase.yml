@@ -12,7 +12,6 @@ on:
 
 permissions:
   contents: read
-  checks: read
 
 concurrency:
   group: firebase-hosting-production
@@ -41,10 +40,19 @@ jobs:
         working-directory: my-portfolio
         run: npm run build
 
+      - name: Verify Firebase credentials are configured
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+          if [ -z "$FIREBASE_SERVICE_ACCOUNT" ]; then
+            echo "::error::Missing GitHub Actions secret FIREBASE_SERVICE_ACCOUNT. Add the full Firebase service-account JSON, not just the service-account email address."
+            exit 1
+          fi
+
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-          projectId: ${{ secrets.FIREBASE_PROJECT_ID }}
+          projectId: portfolio-27b98
           channelId: live
