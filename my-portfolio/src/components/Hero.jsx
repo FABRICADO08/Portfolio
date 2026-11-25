@@ -13,16 +13,16 @@ export default function Hero() {
           <span> experiences that work.</span>
         </h1>
         <p className="intro">
-          Software developer focused on Mendix, Java and React, with a foundation in
-          Computer Science and Physics. I enjoy turning complex requirements
-          into practical, reliable applications.
+          I develop enterprise applications and digital solutions, with a focus on Mendix,
+          Java and React. With a foundation in Computer Science and Physics, I bring a
+          structured, analytical approach to turning business requirements into reliable software.
         </p>
         <p className="hero-subcopy">
-          Graduate Trainee at Mercedes-Benz South Africa · BSc graduate · Currently studying Honours in Computing at UNISA
+          Graduate Trainee at Mercedes-Benz South Africa · BSc graduate · Pursuing an Honours degree in Computing at UNISA
         </p>
         <div className="actions">
           <Link to="/projects" className="button primary">Explore my work <span aria-hidden="true">↗</span></Link>
-          <Link to="/contact" className="button secondary">Let’s connect</Link>
+          <Link to="/contact" className="button secondary">Contact me</Link>
         </div>
         <ul className="hero-stack" aria-label="Core technologies">
           {technologies.map((technology) => <li key={technology}>{technology}</li>)}
