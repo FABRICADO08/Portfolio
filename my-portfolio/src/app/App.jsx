@@ -9,6 +9,18 @@ import Contact from '../components/Contact'
 import Footer from '../components/Footer'
 import Timeline from '../components/TimelineItem'
 
+const SITE_URL = 'https://portfolio-27b98.web.app'
+
+function setMeta(attribute, key, content) {
+  let tag = document.querySelector(`meta[${attribute}="${key}"]`)
+  if (!tag) {
+    tag = document.createElement('meta')
+    tag.setAttribute(attribute, key)
+    document.head.appendChild(tag)
+  }
+  tag.setAttribute('content', content)
+}
+
 const pageMeta = {
   '/': ['Web & Mendix Developer', 'Anele Simbela is a software developer and Graduate Trainee in South Africa. Explore selected React, Mendix, mobile development and enterprise application work.'],
   '/projects': ['Projects', 'Explore Anele Simbela’s selected software projects, including Android development, React applications and enterprise Mendix solutions.'],
@@ -40,15 +52,20 @@ function NotFound() {
 export default function App() {
   const { pathname } = useLocation()
   useEffect(() => {
+    const isKnownPage = Object.hasOwn(pageMeta, pathname)
     const [title, description] = pageMeta[pathname] || ['Page not found', 'The requested page could not be found. Return to Anele Simbela’s portfolio home page.']
-    document.title = `Anele Simbela | ${title} | South Africa`
-    let tag = document.querySelector('meta[name="description"]')
-    if (!tag) {
-      tag = document.createElement('meta')
-      tag.name = 'description'
-      document.head.appendChild(tag)
-    }
-    tag.content = description
+    const pageTitle = `Anele Simbela | ${title} | South Africa`
+    const canonicalUrl = `${SITE_URL}${pathname === '/' ? '/' : pathname}`
+    document.title = pageTitle
+    setMeta('name', 'description', description)
+    setMeta('name', 'robots', isKnownPage ? 'index, follow' : 'noindex, follow')
+    setMeta('property', 'og:title', pageTitle)
+    setMeta('property', 'og:description', description)
+    setMeta('property', 'og:url', canonicalUrl)
+    setMeta('name', 'twitter:title', pageTitle)
+    setMeta('name', 'twitter:description', description)
+    const canonical = document.querySelector('link[rel="canonical"]')
+    if (canonical) canonical.href = canonicalUrl
     window.scrollTo({ top: 0, behavior: 'instant' })
     document.getElementById('main-content')?.focus()
   }, [pathname])
