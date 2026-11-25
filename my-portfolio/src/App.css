@@ -1,8 +1,0 @@
-/* Application-level reset. Component styling lives in index.css. */
-#root {
-  min-height: 100vh;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  text-align: left;
-}
