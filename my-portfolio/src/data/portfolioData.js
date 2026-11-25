@@ -3,6 +3,9 @@ export const profile = {
   headline: 'Software Developer | Mendix Low-Code Developer',
   location: 'Bizana, Eastern Cape, South Africa',
   email: 'anelefabricado@gmail.com',
+  portfolio: 'https://portfolio-27b98.web.app/',
+  github: 'https://github.com/FABRICADO08',
+  linkedin: 'https://www.linkedin.com/in/anele-simbela-2202b9349',
   summary: 'Software developer with a BSc in Computer Science and Physics and professional experience contributing to enterprise application delivery. Experienced in Mendix development, requirements analysis, REST API integrations, testing, debugging and technical documentation, with additional work across React, TypeScript and Android development. Focused on translating business needs into reliable, maintainable digital solutions.',
 }
 
