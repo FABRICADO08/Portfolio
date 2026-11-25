@@ -149,7 +149,11 @@ img { display: block; max-width: 100%; }
 .site-footer p { margin: 0; }
 .site-footer div { display: flex; gap: 22px; }
 .site-footer a { color: #9ccfff; }
-@media (min-width: 1500px) {\n  .project-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }\n  .skill-groups { grid-template-columns: repeat(4,minmax(0,1fr)); }\n}\n@media (max-width: 900px) {
+@media (min-width: 1500px) {
+  .project-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .skill-groups { grid-template-columns: repeat(4,minmax(0,1fr)); }
+}
+@media (max-width: 900px) {
   .navigation { grid-template-columns: 1fr auto; gap: 10px 16px; padding-block: 12px; }
   .nav-links { grid-column: 1/-1; grid-row: 2; justify-content: flex-start; width: 100%; overflow-x: auto; flex-wrap: nowrap; }
   .nav-links a { white-space: nowrap; }
