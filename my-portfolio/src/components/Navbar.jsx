@@ -14,7 +14,8 @@ export default function Navbar() {
     <header className="site-header">
       <nav className="content-width navigation" aria-label="Main navigation">
         <NavLink to="/" className="brand" aria-label="Anele Simbela home">
-          AS<span aria-hidden="true">.</span><span className="brand-name">Anele Simbela</span>
+          <span className="brand-monogram" aria-hidden="true">AS</span>
+          <span className="brand-copy"><strong>Anele Simbela</strong><small>Software Developer</small></span>
         </NavLink>
         <div className="nav-links">
           {links.map(([to, label]) => (
@@ -23,6 +24,7 @@ export default function Navbar() {
             </NavLink>
           ))}
         </div>
+        <NavLink to="/contact" className="nav-cta">Let’s talk <span aria-hidden="true">↗</span></NavLink>
       </nav>
     </header>
   )
