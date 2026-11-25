@@ -1,30 +1,26 @@
-import { useState, useEffect } from 'react'
+import { skills } from '../data/portfolioData'
 
-const fallbackSkills = ['HTML', 'CSS', 'JavaScript', 'React', 'TypeScript', 'Mendix', 'Azure', 'Docker', 'PostgreSQL', 'Git', 'GitHub']
+const groups = [
+  { title: 'Application development', items: ['Mendix', 'React', 'JavaScript', 'TypeScript', 'Kotlin', 'Jetpack Compose'] },
+  { title: 'Platforms & integration', items: ['Microsoft Azure', 'REST APIs', 'PostgreSQL', 'Docker'] },
+  { title: 'Engineering practice', items: ['HTML', 'CSS', 'Git', 'Agile Project Management'] },
+]
 
 export default function Skills() {
-  const [skills, setSkills] = useState(fallbackSkills)
-
-  useEffect(() => {
-    fetch('/api/skills')
-      .then((res) => { if (!res.ok) throw new Error('Skills unavailable'); return res.json() })
-      .then((data) => {
-        if (Array.isArray(data) && data.length > 0) setSkills(data)
-      })
-      .catch(() => {})
-  }, [])
-
   return (
-    <section className="section">
-      <div className="content-width">
-        <p className="eyebrow">Technical toolkit</p><h2>Technologies I work with</h2><p className="section-intro">Web development: React, TypeScript, JavaScript, HTML and CSS. Application platforms and infrastructure: Mendix, Azure, Docker and PostgreSQL. These describe my technical experience, rather than proficiency ratings.</p>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {skills.map((skill) => (
-            <div key={skill} className="bg-slate-800 p-4 rounded-lg text-center">
-              {skill}
-            </div>
-          ))}
-        </div>
+    <section id="skills" className="section content-width skills-section" aria-labelledby="skills-heading">
+      <div className="section-heading-row">
+        <div><p className="eyebrow">Tools of the trade</p><h2 id="skills-heading">My technical toolkit</h2><p className="section-intro">A growing set of tools and technologies I use to design, build and support digital solutions.</p></div>
+        <span className="about-number">02 <i /> CAPABILITIES</span>
+      </div>
+      <div className="skill-groups">
+        {groups.map((group, index) => (
+          <article className="skill-group" key={group.title}>
+            <span className="skill-index">0{index + 1}</span>
+            <h3>{group.title}</h3>
+            <ul>{group.items.filter((item) => skills.includes(item)).map((item) => <li key={item}>{item}<span aria-hidden="true">↗</span></li>)}</ul>
+          </article>
+        ))}
       </div>
     </section>
   )

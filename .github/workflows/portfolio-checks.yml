@@ -1,0 +1,37 @@
+name: Portfolio checks
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "my-portfolio/**"
+      - ".github/workflows/portfolio-checks.yml"
+  push:
+    branches: [main]
+    paths:
+      - "my-portfolio/**"
+      - ".github/workflows/portfolio-checks.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build React portfolio
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: my-portfolio
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: my-portfolio/package-lock.json
+      - name: Install dependencies
+        run: npm ci
+      - name: Build production bundle
+        run: npm run build

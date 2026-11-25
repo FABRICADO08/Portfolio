@@ -1,16 +1,27 @@
-# React + Vite
+# Anele Simbela — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A static React + Vite portfolio. This is a pure frontend application: it does not use a custom backend, API routes, database, serverless functions, authentication provider or server-side content store.
 
-Currently, two official plugins are available:
+## Run locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+npm ci
+npm run dev
+```
 
-## React Compiler
+## Build
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm run build
+npm run preview
+```
 
-## Expanding the ESLint configuration
+## Update portfolio content
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Edit `src/data/portfolioData.js` to update projects, skills and certifications. Commit and deploy the frontend to publish changes.
+
+There is intentionally no browser-based admin dashboard. A static frontend cannot securely write shared content back to the deployed website. Browser storage would only save changes on one device, so content updates are maintained in source control and published through deployment.
+
+## Deployment
+
+Deploy the `my-portfolio` directory as a static site. The included `netlify.toml` only provides the single-page-app route fallback; it does not configure serverless functions or a database.

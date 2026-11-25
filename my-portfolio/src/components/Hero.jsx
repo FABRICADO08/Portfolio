@@ -1,45 +1,48 @@
 import { Link } from 'react-router-dom'
 
-const technologies = ['Mendix', 'React', 'JavaScript', 'Azure', 'PostgreSQL']
+const technologies = ['Mendix', 'React', 'Azure', 'JavaScript', 'TypeScript', 'PostgreSQL']
 
 export default function Hero() {
   return (
     <section className="hero content-width" aria-labelledby="hero-title">
       <div className="hero-copy">
-        <p className="eyebrow">Bizana, Eastern Cape · South Africa</p>
-        <p className="hero-name">Anele Simbela</p>
+        <p className="eyebrow"><span className="status-dot" /> Available for meaningful opportunities · South Africa</p>
+        <p className="hero-name">Hello, I’m Anele Simbela</p>
         <h1 id="hero-title">
-          Web &amp; Mendix developer.
-          <span>Practical problems. Thoughtful solutions.</span>
+          I build digital
+          <span> experiences that work.</span>
         </h1>
         <p className="intro">
-          I’m a Graduate Trainee at Mercedes-Benz South Africa and a BSc Computer Science
-          and Physics graduate. I’m currently studying towards Honours in Computing at
-          UNISA. I use React, TypeScript and Mendix to develop web applications, with
-          experience in PostgreSQL, Azure and Docker.
+          Software developer focused on Mendix and React, with a foundation in
+          Computer Science and Physics. I enjoy turning complex requirements
+          into practical, reliable applications.
         </p>
-        <p className="muted">
-          Exploring junior software developer opportunities, with interests in cyber
-          security and technical support.
+        <p className="hero-subcopy">
+          Graduate Trainee at Mercedes-Benz South Africa · BSc Computer Science and Physics
         </p>
         <div className="actions">
-          <Link to="/projects" className="button primary">Explore projects <span aria-hidden="true">↗</span></Link>
-          <Link to="/contact" className="button secondary">Get in touch</Link>
+          <Link to="/projects" className="button primary">Explore my work <span aria-hidden="true">↗</span></Link>
+          <Link to="/contact" className="button secondary">Let’s connect</Link>
         </div>
         <ul className="hero-stack" aria-label="Core technologies">
           {technologies.map((technology) => <li key={technology}>{technology}</li>)}
         </ul>
       </div>
       <figure className="portrait">
-        <img
-          src="/img/ANELE.Simbela.profile.png"
-          alt="Portrait of Anele Simbela"
-          width="480"
-          height="540"
-          fetchPriority="high"
-        />
-        <figcaption>BSc graduate · Honours in Computing at UNISA</figcaption>
+        <div className="portrait-frame">
+          <img
+            src="/img/ANELE.Simbela.profile.png"
+            alt="Portrait of Anele Simbela"
+            width="480"
+            height="540"
+            fetchPriority="high"
+          />
+          <span className="portrait-orbit portrait-orbit-one" aria-hidden="true" />
+          <span className="portrait-orbit portrait-orbit-two" aria-hidden="true" />
+        </div>
+        <figcaption><span className="portrait-caption-dot" /> Building, learning and improving — one solution at a time.</figcaption>
       </figure>
+      <div className="hero-scroll" aria-hidden="true"><span /> Scroll to explore</div>
     </section>
   )
 }
