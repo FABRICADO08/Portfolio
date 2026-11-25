@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-const technologies = ['Mendix', 'React', 'Azure', 'JavaScript', 'TypeScript', 'PostgreSQL']
+const technologies = ['Mendix', 'React', 'Java', 'Azure', 'JavaScript', 'TypeScript', 'PostgreSQL']
 
 export default function Hero() {
   return (
@@ -13,7 +13,7 @@ export default function Hero() {
           <span> experiences that work.</span>
         </h1>
         <p className="intro">
-          Software developer focused on Mendix and React, with a foundation in
+          Software developer focused on Mendix, Java and React, with a foundation in
           Computer Science and Physics. I enjoy turning complex requirements
           into practical, reliable applications.
         </p>
