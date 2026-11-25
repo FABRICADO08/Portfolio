@@ -22,6 +22,9 @@ export default function Hero() {
         </p>
         <div className="actions">
           <Link to="/projects" className="button primary">Explore my work <span aria-hidden="true">↗</span></Link>
+          <a href="/Anele_Simbela_CV.pdf" className="button secondary" download="Anele_Simbela_CV.pdf">
+            Download CV <span aria-hidden="true">↓</span>
+          </a>
           <Link to="/contact" className="button secondary">Contact me</Link>
         </div>
         <ul className="hero-stack" aria-label="Core technologies">
