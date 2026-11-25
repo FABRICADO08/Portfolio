@@ -6,7 +6,7 @@ export default function Hero() {
   return (
     <section className="hero content-width" aria-labelledby="hero-title">
       <div className="hero-copy">
-        <p className="eyebrow"><span className="status-dot" /> Available for meaningful opportunities · South Africa</p>
+        <p className="eyebrow"><span className="status-dot" /> Software developer · South Africa</p>
         <p className="hero-name">Hello, I’m Anele Simbela</p>
         <h1 id="hero-title">
           I build digital
