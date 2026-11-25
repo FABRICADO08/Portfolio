@@ -18,7 +18,7 @@ export default function Hero() {
           into practical, reliable applications.
         </p>
         <p className="hero-subcopy">
-          Graduate Trainee at Mercedes-Benz South Africa · BSc Computer Science and Physics
+          Graduate Trainee at Mercedes-Benz South Africa · BSc graduate · Currently studying Honours in Computing at UNISA
         </p>
         <div className="actions">
           <Link to="/projects" className="button primary">Explore my work <span aria-hidden="true">↗</span></Link>
