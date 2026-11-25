@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://afsportfolio.netlify.app/</loc></url>
-<url><loc>https://afsportfolio.netlify.app/projects</loc></url>
-<url><loc>https://afsportfolio.netlify.app/about</loc></url>
-<url><loc>https://afsportfolio.netlify.app/skills</loc></url>
-<url><loc>https://afsportfolio.netlify.app/timeline</loc></url>
-<url><loc>https://afsportfolio.netlify.app/contact</loc></url>
+  <url><loc>https://portfolio-27b98.web.app/</loc></url>
+  <url><loc>https://portfolio-27b98.web.app/projects</loc></url>
+  <url><loc>https://portfolio-27b98.web.app/about</loc></url>
+  <url><loc>https://portfolio-27b98.web.app/skills</loc></url>
+  <url><loc>https://portfolio-27b98.web.app/timeline</loc></url>
+  <url><loc>https://portfolio-27b98.web.app/contact</loc></url>
 </urlset>
