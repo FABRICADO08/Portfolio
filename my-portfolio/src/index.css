@@ -178,3 +178,65 @@ body {
   .button, .project-card, .nav-links a { transition: none; }
   .button:hover, .project-card:hover { transform: none; }
 }
+
+.hero-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+  list-style: none;
+  margin: 1.7rem 0 0;
+  padding: 0;
+}
+.hero-stack li {
+  border: 1px solid rgba(139, 188, 255, .24);
+  background: rgba(30, 58, 95, .32);
+  color: #c8defb;
+  border-radius: 999px;
+  padding: .4rem .8rem;
+  font-size: .8rem;
+  font-weight: 650;
+}
+.timeline-page {
+  padding-block: 4.5rem 6rem;
+  color: #e7eef8;
+  background: transparent;
+}
+.timeline-heading { max-width: 760px; margin-bottom: 3.5rem; }
+.timeline-heading h1 {
+  font-size: clamp(2.1rem, 4.5vw, 3.5rem);
+  letter-spacing: -.055em;
+  margin: 0 0 1rem;
+}
+.timeline-heading > p:last-child, .certifications-heading p { color: var(--muted); }
+.timeline-section { margin-top: 3.5rem; }
+.timeline-section > h2, .certifications-heading h2 {
+  font-size: clamp(1.55rem, 3vw, 2rem);
+  margin-bottom: 1.4rem;
+}
+.experience-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
+.experience-item, .education-card, .certification-card {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(19, 33, 54, .96), rgba(12, 22, 38, .96));
+  padding: 1.4rem 1.5rem;
+}
+.experience-item { border-left: 3px solid #609ce9; }
+.experience-date { color: #8dbdff; font-size: .84rem; font-weight: 700; margin: 0 0 .6rem; }
+.experience-item h3, .education-card h3, .certification-card h3 { margin: 0 0 .55rem; font-size: 1.15rem; }
+.experience-item p:last-child, .education-card p:last-child, .certification-card p { color: var(--muted); margin: 0; }
+.education-grid, .certification-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.education-card { border-top: 2px solid #609ce9; }
+.certifications-heading { margin-bottom: 1.4rem; }
+.certifications-heading h2 { margin-bottom: .5rem; }
+.certification-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.certification-card { display: flex; align-items: flex-start; gap: 1rem; }
+.certification-card img { width: 64px; height: 64px; object-fit: contain; flex: 0 0 64px; }
+.certification-card h3 { font-size: 1rem; line-height: 1.35; }
+.certification-card p { font-size: .88rem; line-height: 1.6; }
+@media (max-width: 850px) {
+  .certification-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .education-grid, .certification-grid { grid-template-columns: 1fr; }
+  .experience-item, .education-card, .certification-card { padding: 1.1rem; }
+}
