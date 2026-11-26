@@ -454,9 +454,3 @@ html[data-theme="light"] body { background: #e9eef7; }
 .contact-card .button { border-radius: 999px; }
 
 @media (max-width: 900px) { .d-page-hero-inner { padding-left: 0; padding-block: 38px 34px; } }
-
-/* Organisation and education brand marks */
-.timeline-entity-badge { gap: 10px; padding: 7px 12px 7px 8px; }
-.timeline-entity-logo { width: 34px; height: 34px; flex: 0 0 34px; object-fit: contain; border-radius: 5px; background: rgba(255,255,255,.94); padding: 3px; }
-.education-entity-badge .timeline-entity-logo { width: 48px; height: 38px; flex-basis: 48px; }
-.timeline-entity-badge > span:last-child { overflow-wrap: anywhere; }
