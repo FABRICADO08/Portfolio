@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Download, Home, Moon, Sun } from 'lucide-react'
-import { profile } from '../data/portfolioData'
+import { certifications, education, experience, profile, projects, skills } from '../data/portfolioData'
+import { generateCV } from '../utils/generateCV'
 
 const links = [
   ['/about', 'About'],
@@ -32,8 +33,7 @@ export default function Navbar() {
     }
   }, [theme])
 
-  const cvHref = profile.cvUrl || `mailto:${profile.email}?subject=${encodeURIComponent('CV request')}`
-  const cvProps = profile.cvUrl ? { download: true } : {}
+  const handleDownloadCV = () => generateCV({ profile, experience, education, projects, skills, certifications })
 
   return (
     <header className="site-header">
@@ -42,7 +42,7 @@ export default function Navbar() {
           <span className="brand-monogram" aria-hidden="true">
             <img src="/img/ANELE.Simbela.profile.png" alt="" />
           </span>
-          <span className="brand-copy"><strong>{profile.name}</strong><small>{profile.role}</small></span>
+          <span className="brand-copy"><strong>{profile.name}</strong><small>Software Developer</small></span>
         </NavLink>
         <div className="nav-links">
           <NavLink to="/" end className="nav-home"><Home size={16} aria-hidden="true" /> Home</NavLink>
@@ -51,7 +51,7 @@ export default function Navbar() {
           ))}
         </div>
         <div className="nav-actions">
-          <a className="nav-cta" href={cvHref} {...cvProps}><Download size={16} aria-hidden="true" /> Download CV</a>
+          <button type="button" className="nav-cta" onClick={handleDownloadCV}><Download size={16} aria-hidden="true" /> Download CV</button>
           <button
             type="button"
             className="theme-toggle"
