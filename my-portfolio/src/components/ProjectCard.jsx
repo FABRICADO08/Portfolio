@@ -29,9 +29,7 @@ const isWebLink = (value) => {
 }
 
 export default function ProjectCard({ id, art, image, title, tech, live, github, description }) {
-  const technologies = typeof tech === 'string'
-    ? tech.split(',').map((item) => item.trim()).filter(Boolean)
-    : []
+  const technologies = Array.isArray(tech) ? tech : (typeof tech === 'string' ? tech.split(',').map((item) => item.trim()).filter(Boolean) : [])
 
   return (
     <article className="project-card" id={id}>
