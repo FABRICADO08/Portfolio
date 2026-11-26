@@ -26,7 +26,7 @@ export default function Certifications() {
           const status = getCertificationStatus(cert)
           return (
             <article className="certification-card" key={cert.id}>
-              <img src={cert.image || '/img/AZ-900.png'} alt="" loading="lazy" width="76" height="76" />
+              {cert.image ? <img src={cert.image} alt="" loading="lazy" width="76" height="76" /> : <div className="certification-image-placeholder" aria-hidden="true">✦</div>}
               <div>
                 <h3>{cert.title}</h3>
                 <p>{cert.description}</p>
