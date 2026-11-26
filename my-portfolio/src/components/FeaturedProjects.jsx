@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import ProjectArt from './ProjectArt'
-import { featuredProjects } from '../data/portfolioData'
+import { projects } from '../data/portfolioData'
 
 const isWebLink = (value) => {
   try {
@@ -11,7 +11,8 @@ const isWebLink = (value) => {
   }
 }
 
-function FeaturedCard({ title, description, tags, art, github, live }) {
+function FeaturedCard({ title, card, art, github, live }) {
+  const { summary: description, tags } = card
   const href = [live, github].find(isWebLink)
   const inner = (
     <>
@@ -40,7 +41,7 @@ export default function FeaturedProjects() {
         <Link to="/projects" className="d-view-all">View All Projects <ArrowRight size={14} aria-hidden="true" /></Link>
       </div>
       <div className="d-project-grid">
-        {featuredProjects.map((project) => <FeaturedCard key={project.id} {...project} />)}
+        {projects.filter((project) => project.card).map((project) => <FeaturedCard key={project.id} {...project} />)}
       </div>
     </section>
   )

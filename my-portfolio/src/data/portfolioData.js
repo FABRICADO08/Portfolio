@@ -21,9 +21,11 @@ export const education = [
 ]
 
 export const projects = [
-  { id: 'budget-tracker', title: 'Budget Tracker', description: 'A Kotlin-based Android application focused on personal financial management. It is designed to help users track income and expenses, organise budgets and manage day-to-day finances through a clear mobile interface, with South African users in mind.', tech: 'Kotlin, Android, Jetpack Compose', image: '', github: 'https://github.com/FABRICADO08/Budget-Tracker', live: '' },
-  { id: 'gps4mps', title: 'GPS4MPS Virtual Playbook', description: 'A React and TypeScript planning experience featuring calendar workflows, reusable interface components, role-aware navigation and Microsoft 365 integration. Organisation-specific information and access details are excluded to protect internal confidentiality.', tech: 'React, TypeScript, Vite, FullCalendar, Microsoft 365', image: '', github: '', live: '' },
-  { id: 'mendix-enterprise', title: 'Enterprise Mendix Applications', description: 'Contributions to enterprise low-code application delivery, including requirements analysis, Mendix development, REST API integration, testing, debugging and technical documentation. Project-specific information is intentionally limited where confidentiality applies.', tech: 'Mendix, Java, REST APIs, JavaScript, SQL, Agile', image: '', github: '', live: '' },
+  { id: 'grill-the-code', art: 'code', card: { summary: 'Collaborative Mendix app with junior developers', tags: ['Mendix', 'Collaboration'] }, title: 'Grill-the-Code', description: 'A collaborative Mendix application built together with junior developers.', tech: 'Mendix', image: '', github: '', live: '' },
+  { id: 'gps4mps', art: 'calendar', card: { summary: 'GPS4MPS calendar & playbook solution', tags: ['React', 'FullCalendar'] }, title: 'MPS Virtual Playbook', description: 'A React and TypeScript planning experience featuring calendar workflows, reusable interface components, role-aware navigation and Microsoft 365 integration. Organisation-specific information and access details are excluded to protect internal confidentiality.', tech: 'React, TypeScript, Vite, FullCalendar, Microsoft 365', image: '', github: '', live: '' },
+  { id: 'security-scanner', art: 'shield', card: { summary: 'Mendix security analysis tool', tags: ['Python', 'Security'] }, title: 'Security Scanner', description: 'A Python-based tool for analysing the security of Mendix applications.', tech: 'Python, Security', image: '', github: '', live: '' },
+  { id: 'budget-tracker', art: 'chart', card: { summary: 'Personal finance app (Kotlin/Android)', tags: ['Kotlin', 'Finance'] }, title: 'Budget Tracker', description: 'A Kotlin-based Android application focused on personal financial management. It is designed to help users track income and expenses, organise budgets and manage day-to-day finances through a clear mobile interface, with South African users in mind.', tech: 'Kotlin, Android, Jetpack Compose', image: '', github: 'https://github.com/FABRICADO08/Budget-Tracker', live: '' },
+  { id: 'mendix-enterprise', art: 'code', title: 'Enterprise Mendix Applications', description: 'Contributions to enterprise low-code application delivery, including requirements analysis, Mendix development, REST API integration, testing, debugging and technical documentation. Project-specific information is intentionally limited where confidentiality applies.', tech: 'Mendix, Java, REST APIs, JavaScript, SQL, Agile', image: '', github: '', live: '' },
 ]
 
 export const skills = ['Mendix', 'React', 'JavaScript', 'TypeScript', 'Java', 'Kotlin', 'Jetpack Compose', 'HTML', 'CSS', 'REST APIs', 'Microsoft Azure', 'PostgreSQL', 'Docker', 'Git', 'Agile Project Management']
@@ -38,13 +40,6 @@ export const certifications = [
 ]
 
 // Home page design data (cards, strip, bars). The CV generator still uses the full lists above.
-export const featuredProjects = [
-  { id: 'grill-the-code', title: 'Grill-the-Code', description: 'Collaborative Mendix app with junior developers', tags: ['Mendix', 'Collaboration'], art: 'code', github: '', live: '' },
-  { id: 'mps-virtual-playbook', title: 'MPS Virtual Playbook', description: 'GPS4MPS calendar & playbook solution', tags: ['React', 'FullCalendar'], art: 'calendar', github: '', live: '' },
-  { id: 'security-scanner', title: 'Security Scanner', description: 'Mendix security analysis tool', tags: ['Python', 'Security'], art: 'shield', github: '', live: '' },
-  { id: 'budget-tracker', title: 'Budget Tracker', description: 'Personal finance app (Kotlin/Android)', tags: ['Kotlin', 'Finance'], art: 'chart', github: 'https://github.com/FABRICADO08/Budget-Tracker', live: '' },
-]
-
 export const techStrip = [
   { id: 'mendix', name: 'Mendix', note: 'Advanced Developer' },
   { id: 'react', name: 'React', note: 'Frontend Expert' },
