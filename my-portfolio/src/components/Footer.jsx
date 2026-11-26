@@ -1,3 +1,15 @@
+import { profile } from '../data/portfolioData'
+
 export default function Footer() {
-  return <footer className="site-footer content-width"><p>© {new Date().getFullYear()} Anele Simbela · South Africa</p><div><a href="https://www.linkedin.com/in/anele-simbela-2202b9349" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="mailto:anelefabricado@gmail.com">Email Anele</a></div></footer>
+  return (
+    <footer className="site-footer content-width">
+      <p>© {new Date().getFullYear()} Anele Simbela · South Africa</p>
+      <nav aria-label="Professional links">
+        <a href={profile.portfolio} target="_blank" rel="noopener noreferrer">Portfolio</a>
+        <a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href={`mailto:${profile.email}`}>Email</a>
+      </nav>
+    </footer>
+  )
 }

@@ -120,7 +120,8 @@ img { display: block; max-width: 100%; }
 .contact-layout { display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 60px; }
 .contact-layout h2 { max-width: 16ch; }
 .contact-layout .section-intro { margin-bottom: 22px; }
-.contact-layout > div:first-child > a:not(.button) { display: inline-block; margin: 8px 18px 8px 0; }
+.contact-links { display: flex; flex-wrap: wrap; gap: 12px 22px; margin-top: 22px; }
+.contact-links a { color: #9ccfff; text-underline-offset: 4px; }
 .contact-layout .muted { color: #8298b2; font-size: .82rem; }
 .contact-card { padding: 28px; }
 .contact-card h3 { font-size: 1.2rem; }
@@ -148,7 +149,7 @@ img { display: block; max-width: 100%; }
 .certification-card p { margin-bottom: 0; }
 .site-footer { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding-block: 28px; border-top: 1px solid var(--line); color: #8196b0; font-size: .78rem; }
 .site-footer p { margin: 0; }
-.site-footer div { display: flex; gap: 22px; }
+.site-footer nav { display: flex; flex-wrap: wrap; gap: 22px; }
 .site-footer a { color: #9ccfff; }
 @media (min-width: 1500px) {
   .project-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
@@ -241,5 +242,5 @@ a:focus-visible, button:focus-visible, [tabindex="-1"]:focus-visible {
   .project-body,.skill-group,.education-card { padding: 19px; }
   .certification-card { gap: 12px; padding: 14px; }
   .certification-card img { width: 54px; height: 54px; flex-basis: 54px; }
-  .contact-layout > div:first-child > a:not(.button) { overflow-wrap: anywhere; }
+  .contact-links a { overflow-wrap: anywhere; }
 }
