@@ -10,14 +10,14 @@ export const profile = {
 }
 
 export const experience = [
-  { role: 'Graduate Trainee', organisation: 'Mercedes-Benz South Africa', dates: 'February 2026 - Present', detail: 'Contributing to enterprise application delivery, with experience in Mendix development, requirements analysis, integrations, testing and technical documentation.' },
-  { role: 'Internal Intern', organisation: 'Mercedes-Benz South Africa', dates: 'August 2024 - January 2026', detail: 'Supported the development and improvement of internal business applications, collaborating with developers and stakeholders on requirements, implementation, testing and support.' },
-  { role: 'External Intern', organisation: 'Mercedes-Benz South Africa - NetCampus', dates: 'July 2023 - July 2024', detail: 'Completed an external internship placement, gaining practical experience in enterprise IT and software development within a corporate environment.' },
+  { role: 'Graduate Trainee', organisation: 'Mercedes-Benz South Africa', logo: '/img/mercedes-benz-star.svg', dates: 'February 2026 - Present', detail: 'Contributing to enterprise application delivery, with experience in Mendix development, requirements analysis, integrations, testing and technical documentation.' },
+  { role: 'Internal Intern', organisation: 'Mercedes-Benz South Africa', logo: '/img/mercedes-benz-star.svg', dates: 'August 2024 - January 2026', detail: 'Supported the development and improvement of internal business applications, collaborating with developers and stakeholders on requirements, implementation, testing and support.' },
+  { role: 'External Intern', organisation: 'Mercedes-Benz South Africa - NetCampus', logo: '/img/netcampus-wordmark.svg', dates: 'July 2023 - July 2024', detail: 'Completed an external internship placement, gaining practical experience in enterprise IT and software development within a corporate environment.' },
 ]
 
 export const education = [
-  { qualification: 'Honours in Computing', institution: 'University of South Africa (UNISA)', dates: 'In progress' },
-  { qualification: 'BSc in Computer Science and Physics', institution: 'University of Fort Hare, South Africa', dates: 'Completed May 2023' },
+  { qualification: 'Honours in Computing', institution: 'University of South Africa (UNISA)', logo: '/img/unisa-wordmark.svg', dates: 'In progress' },
+  { qualification: 'BSc in Computer Science and Physics', institution: 'University of Fort Hare, South Africa', logo: '/img/ufh-wordmark.svg', dates: 'Completed May 2023' },
 ]
 
 export const projects = [
