@@ -138,6 +138,9 @@ img { display: block; max-width: 100%; }
 .experience-item { padding: 22px; border-left: 3px solid #379ce9; }
 .experience-item p,.education-card p,.certification-card p { color: #aebed2; font-size: .86rem; line-height: 1.65; }
 .experience-item .experience-organisation { margin: 7px 0 10px; color: #d5e6f8; font-size: .78rem; font-weight: 700; letter-spacing: .01em; }
+.timeline-entity-badge { width: fit-content; max-width: 100%; display: inline-flex; align-items: center; gap: 8px; margin: 8px 0 12px; padding: 7px 11px; border: 1px solid rgba(103,178,245,.34); border-radius: 999px; color: #c8e5ff; background: linear-gradient(110deg,rgba(32,111,183,.2),rgba(20,61,101,.28)); font-size: .74rem; font-weight: 700; line-height: 1.35; }
+.timeline-entity-badge svg { flex: 0 0 auto; color: #7fc2ff; }
+.education-entity-badge { margin-top: 10px; }
 .experience-date { color: #7ebeff !important; font-size: .72rem !important; font-weight: 700; letter-spacing: .04em; }
 .education-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; margin-top: 22px; }
 .education-card { padding: 24px; }
