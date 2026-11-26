@@ -4,7 +4,7 @@ The portfolio now supports a private `/admin` area for creating, editing and del
 
 ## Firebase services
 
-- **Authentication:** Email/password sign-in. Only the owner email is authorised.
+- **Authentication:** Google sign-in. Only the owner email is authorised.
 - **Cloud Firestore:** Stores `projects`, `certifications` and `settings/content`.
 - **Cloud Storage:** Stores uploaded project and certification images.
 
@@ -30,7 +30,7 @@ For local development, copy `.env.example` to `.env.local` and fill in the same 
 
 ## 2. Enable Authentication
 
-In **Build → Authentication → Sign-in method**, enable **Email/Password**. Under **Users**, add the owner account using `anelefabricado@gmail.com` and set a strong password. Do not add a public sign-up page.
+In **Build → Authentication → Sign-in method**, enable **Google**. Ensure the Firebase Hosting domains are listed under Authentication → Settings → Authorized domains. The admin uses the browser's Google account session/account chooser. Only `anelefabricado@gmail.com` is authorised.
 
 ## 3. Create Firestore
 
@@ -59,8 +59,8 @@ The Firestore and Storage rules are included in this repository. Publish them in
 
 ## Data model
 
-- `projects/{id}`: title, description, tech, image, imagePath, github, live, card, featured, order.
-- `certifications/{id}`: title, label, code, description, image, imagePath, credentialUrl, issuedAt, featured, order.
+- `projects/{id}`: title, description, tech (array), image, imagePath, github, live, card.tags (array), featured, order.
+- `certifications/{id}`: title, label, code, description, image, imagePath, credentialUrl, issuedAt (YYYY-MM-DD), expiryDate (YYYY-MM-DD or empty), noExpiry, featured, order.
 - `settings/content`: `initialized: true` marks the Firestore collections as the source of truth, including when a collection is intentionally empty.
 
 The website never exposes an account creation route. Firestore and Storage rules enforce owner-only writes independently of the UI.
@@ -71,3 +71,8 @@ The admin route is intentionally omitted from the public navigation; open the `/
 ## Google admin sign-in
 
 Enable the **Google** provider in Firebase Console → Authentication → Sign-in method. Ensure `portfolio-27b98.firebaseapp.com` and `portfolio-27b98.web.app` are listed under Authentication → Settings → Authorized domains. The admin page uses Google sign-in; Google may reuse the browser's active account or offer an account chooser when multiple accounts are signed in. Only `anelefabricado@gmail.com` is authorised to manage the portfolio.
+
+
+## Project and certification fields
+
+Project technologies and tags are stored as arrays and selected through multi-select dropdowns. Existing comma-separated technology strings are still read for backward compatibility. Certification issue and expiry dates use calendar date inputs. Set **This certification does not expire** for credentials without an expiry date. Public certification cards calculate their status from the expiry date: **Expired** after the expiry date, **Expiring soon** within 30 days, **Active** otherwise, or **No expiry** when no expiry applies.
