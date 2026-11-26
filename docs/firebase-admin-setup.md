@@ -66,3 +66,8 @@ The Firestore and Storage rules are included in this repository. Publish them in
 The website never exposes an account creation route. Firestore and Storage rules enforce owner-only writes independently of the UI.
 
 The admin route is intentionally omitted from the public navigation; open the `/admin` path directly when you need to manage content.
+
+
+## Google admin sign-in
+
+Enable the **Google** provider in Firebase Console → Authentication → Sign-in method. Ensure `portfolio-27b98.firebaseapp.com` and `portfolio-27b98.web.app` are listed under Authentication → Settings → Authorized domains. The admin page uses Google sign-in; Google may reuse the browser's active account or offer an account chooser when multiple accounts are signed in. Only `anelefabricado@gmail.com` is authorised to manage the portfolio.
