@@ -10,6 +10,7 @@ import Skills from '../components/Skills'
 import Projects from '../components/Projects'
 import Contact from '../components/Contact'
 import Footer from '../components/Footer'
+import PageHero from '../components/PageHero'
 import Timeline from '../components/TimelineItem'
 
 const SITE_URL = 'https://portfolio-27b98.web.app'
@@ -33,23 +34,25 @@ const pageMeta = {
   '/contact': ['Contact', 'Get in touch with Anele Simbela about software development opportunities, collaboration and technical work.'],
   '/timeline': ['Experience & Education', 'View Anele Simbela’s professional experience and education timeline.'],
 }
-const pageHeadings = {
-  '/projects': 'Project portfolio',
-  '/about': 'About Anele',
-  '/skills': 'Technical skills',
-  '/contact': 'Contact Anele',
+const pageHeroes = {
+  '/about': { kicker: 'About me', title: 'About', accent: 'Anele', sub: 'Software developer, problem solver and lifelong learner from South Africa.' },
+  '/projects': { kicker: 'Selected work', title: 'Project', accent: 'portfolio', sub: 'Mobile, web and enterprise low-code solutions built with modern technologies.' },
+  '/skills': { kicker: 'Tools of the trade', title: 'Technical', accent: 'skills', sub: 'The tools and technologies I use to design, build and support digital solutions.' },
+  '/certifications': { kicker: 'Credentials', title: 'Certifications', accent: '& development', sub: 'Selected credentials and continuing professional development.' },
+  '/timeline': { kicker: 'Career journey', title: 'Experience &', accent: 'education', sub: 'A record of my professional experience, academic background and ongoing development.' },
+  '/contact': { kicker: 'Get in touch', title: 'Contact', accent: 'Anele', sub: 'Let’s collaborate on your next big idea.' },
 }
 
 function NotFound() {
   return (
-    <section className="content-width timeline-page" aria-labelledby="not-found-title">
-      <div className="timeline-heading">
-        <p className="eyebrow">404 · Page not found</p>
-        <h1 id="not-found-title">This page isn’t here.</h1>
-        <p>The address may be incorrect, or the page may have moved. Head back to the portfolio home page.</p>
+    <>
+      <PageHero id="not-found-title" kicker="404 · Page not found" title="This page isn’t" accent="here.">
+        The address may be incorrect, or the page may have moved. Head back to the portfolio home page.
+      </PageHero>
+      <section className="content-width not-found-actions">
         <Link to="/" className="button primary">Back to home <span aria-hidden="true">↗</span></Link>
-      </div>
-    </section>
+      </section>
+    </>
   )
 }
 
@@ -79,7 +82,11 @@ export default function App() {
       <a className="skip-link" href="#main-content">Skip to content</a>
       <Navbar />
       <main id="main-content" tabIndex={-1} className="main-content">
-        {pageHeadings[pathname] && <h1 className="content-width page-title">{pageHeadings[pathname]}</h1>}
+        {pageHeroes[pathname] && (
+          <PageHero kicker={pageHeroes[pathname].kicker} title={pageHeroes[pathname].title} accent={pageHeroes[pathname].accent}>
+            {pageHeroes[pathname].sub}
+          </PageHero>
+        )}
         <Routes>
           <Route path="/" element={<><Hero /><FeaturedProjects /><HomePanels /></>} />
           <Route path="/certifications" element={<Certifications />} />
