@@ -1,15 +1,17 @@
+import { Link } from 'react-router-dom'
 import { profile } from '../data/portfolioData'
 
 export default function Footer() {
   return (
     <footer className="site-footer content-width">
-      <p>© {new Date().getFullYear()} Anele Simbela · South Africa</p>
-      <nav aria-label="Professional links">
-        <a href={profile.portfolio} target="_blank" rel="noopener noreferrer">Portfolio</a>
-        <a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href={`mailto:${profile.email}`}>Email</a>
-      </nav>
+      <Link to="/" className="footer-brand" aria-label="Anele Simbela home">
+        <span className="brand-monogram" aria-hidden="true"><img src="/img/ANELE.Simbela.profile.png" alt="" /></span>
+        <strong>{profile.name}</strong>
+        <span className="footer-divider" aria-hidden="true">|</span>
+        <small>Software Developer &amp; Innovator</small>
+      </Link>
+      <p className="footer-motto" aria-hidden="true">Build <i /> Learn <i /> Grow</p>
+      <p className="footer-copy">© {new Date().getFullYear()} {profile.name}. All rights reserved.</p>
     </footer>
   )
 }

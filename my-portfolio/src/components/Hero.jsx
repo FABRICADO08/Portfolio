@@ -1,36 +1,52 @@
 import { Link } from 'react-router-dom'
-import { certifications, education, experience, profile, projects, skills } from '../data/portfolioData'
-import { generateCV } from '../utils/generateCV'
-
-const technologies = ['Mendix', 'React', 'Java', 'Azure', 'JavaScript', 'TypeScript', 'PostgreSQL']
+import { ArrowDown, ArrowRight, Mail } from 'lucide-react'
+import TechIcon from './TechIcons'
+import { techStrip } from '../data/portfolioData'
 
 export default function Hero() {
-  const handleDownloadCV = () => generateCV({ profile, experience, education, projects, skills, certifications })
-
   return (
-    <section className="hero content-width" aria-labelledby="hero-title">
-      <div className="hero-copy">
-        <p className="eyebrow"><span className="status-dot" /> Software developer · South Africa</p>
-        <p className="hero-name">Hello, I’m Anele Simbela</p>
-        <h1 id="hero-title">I build digital<span> experiences that work.</span></h1>
-        <p className="intro">I develop enterprise applications and digital solutions, with a focus on Mendix, Java and React. With a foundation in Computer Science and Physics, I bring a structured, analytical approach to turning business requirements into reliable software.</p>
-        <p className="hero-subcopy">Graduate Trainee at Mercedes-Benz South Africa · BSc graduate · Pursuing an Honours degree in Computing at UNISA</p>
-        <div className="actions">
-          <Link to="/projects" className="button primary">Explore my work <span aria-hidden="true">↗</span></Link>
-          <button type="button" className="button secondary" onClick={handleDownloadCV}>Download CV <span aria-hidden="true">↓</span></button>
-          <Link to="/contact" className="button secondary">Contact me</Link>
-        </div>
-        <ul className="hero-stack" aria-label="Core technologies">{technologies.map((technology) => <li key={technology}>{technology}</li>)}</ul>
+    <section className="d-hero" aria-labelledby="hero-title">
+      <div className="d-hero-bg" aria-hidden="true">
+        <span className="d-hero-glass" />
+        <span className="d-hero-streak d-hero-streak-a" />
+        <span className="d-hero-streak d-hero-streak-b" />
       </div>
-      <figure className="portrait">
-        <div className="portrait-frame">
-          <img src="/img/ANELE.Simbela.profile.png" alt="Portrait of Anele Simbela" width="480" height="540" fetchPriority="high" />
-          <span className="portrait-orbit portrait-orbit-one" aria-hidden="true" />
-          <span className="portrait-orbit portrait-orbit-two" aria-hidden="true" />
+      <div className="content-width d-hero-grid">
+        <div className="d-hero-copy">
+          <p className="d-kicker">Innovate <i /> Build <i /> Transform</p>
+          <h1 id="hero-title">
+            Building Smart<br />Solutions with <span>Mendix &amp; React</span>
+          </h1>
+          <p className="d-hero-sub">
+            BSc Computer Science &amp; Physics Graduate | Mendix Low-Code Developer | React Developer | Azure Certified
+          </p>
+          <div className="actions">
+            <Link to="/projects" className="button primary">View My Projects <ArrowRight size={16} aria-hidden="true" /></Link>
+            <Link to="/contact" className="button secondary"><Mail size={16} aria-hidden="true" /> Let’s Connect</Link>
+          </div>
         </div>
-        <figcaption><span className="portrait-caption-dot" /> Building, learning and improving — one solution at a time.</figcaption>
-      </figure>
-      <div className="hero-scroll" aria-hidden="true"><span /> Scroll to explore</div>
+        <figure className="d-portrait">
+          <img
+            src="/img/ANELE.Simbela.profile.png"
+            alt="Portrait of Anele Simbela"
+            width="548"
+            height="455"
+            fetchPriority="high"
+          />
+          <a className="d-scroll" href="#featured-projects" aria-label="Scroll to featured projects"><ArrowDown size={18} aria-hidden="true" /></a>
+        </figure>
+        <p className="d-tagline" aria-hidden="true">Turning Ideas<br /><span>into Impact</span></p>
+      </div>
+      <div className="content-width">
+        <ul className="d-tech-strip" aria-label="Core technologies">
+          {techStrip.map((tech) => (
+            <li key={tech.id}>
+              <TechIcon name={tech.id} />
+              <span><strong>{tech.name}</strong><small>{tech.note}</small></span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   )
 }

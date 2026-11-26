@@ -1,3 +1,5 @@
+import ProjectArt from './ProjectArt'
+
 const stackLogo = {
   Kotlin: 'kotlin',
   Android: 'android',
@@ -6,6 +8,7 @@ const stackLogo = {
   TypeScript: 'typescript',
   Vite: 'vite',
   Mendix: 'mendix',
+  Python: 'python',
   Java: 'openjdk',
   JavaScript: 'javascript',
   PostgreSQL: 'postgresql',
@@ -25,20 +28,19 @@ const isWebLink = (value) => {
   }
 }
 
-export default function ProjectCard({ image, title, tech, live, github, description }) {
+export default function ProjectCard({ id, art, image, title, tech, live, github, description }) {
   const technologies = typeof tech === 'string'
     ? tech.split(',').map((item) => item.trim()).filter(Boolean)
     : []
 
   return (
-    <article className="project-card">
+    <article className="project-card" id={id}>
       <div className="project-visual">
         {image ? (
           <img src={image} alt={`${title} project preview`} loading="lazy" width="640" height="360" />
         ) : (
-          <div className="project-placeholder" role="img" aria-label={`${title} preview is not available`}>
-            <span aria-hidden="true">{(title || 'P').slice(0, 1).toUpperCase()}</span>
-            <small>Project overview</small>
+          <div className="project-placeholder" role="img" aria-label={`${title} illustration`}>
+            <ProjectArt name={art || 'code'} />
           </div>
         )}
         <span className="project-index" aria-hidden="true">PROJECT / CASE STUDY</span>

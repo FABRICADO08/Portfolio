@@ -2,12 +2,7 @@ import { certifications, education, experience } from '../data/portfolioData'
 
 export default function Timeline() {
   return (
-    <section id="timeline" className="timeline-page content-width" aria-labelledby="timeline-title">
-      <header className="timeline-heading">
-        <p className="eyebrow">Career journey</p>
-        <h1 id="timeline-title">Experience, education and certifications</h1>
-        <p>A record of my professional experience, academic background and ongoing development.</p>
-      </header>
+    <section id="timeline" className="timeline-page content-width" aria-label="Experience and education">
       <section className="timeline-section" aria-labelledby="experience-heading">
         <h2 id="experience-heading">Professional experience</h2>
         <ol className="experience-list">

@@ -1,4 +1,4 @@
-import { skills } from '../data/portfolioData'
+import { skillLevels, skills } from '../data/portfolioData'
 
 const groups = [
   { title: 'Application development', items: ['Mendix', 'Java', 'React', 'JavaScript', 'TypeScript', 'Kotlin', 'Jetpack Compose'] },
@@ -21,6 +21,19 @@ export default function Skills() {
             <ul>{group.items.filter((item) => skills.includes(item)).map((item) => <li key={item}>{item}<span aria-hidden="true">↗</span></li>)}</ul>
           </article>
         ))}
+        <article className="skill-group skill-levels">
+          <span className="skill-index">04</span>
+          <h3>Proficiency</h3>
+          <ul className="d-skill-bars">
+            {skillLevels.map((skill) => (
+              <li key={skill.name}>
+                <span>{skill.name}</span>
+                <div className="d-bar" role="progressbar" aria-label={`${skill.name} proficiency`} aria-valuenow={skill.level} aria-valuemin={0} aria-valuemax={100}><i style={{ width: `${skill.level}%` }} /></div>
+                <b>{skill.level}%</b>
+              </li>
+            ))}
+          </ul>
+        </article>
       </div>
     </section>
   )
