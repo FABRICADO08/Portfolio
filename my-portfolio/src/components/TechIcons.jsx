@@ -16,6 +16,14 @@ const icons = {
       <circle r="2.1" fill="#61dafb" />
     </svg>
   ),
+  java: (
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M13 3c3 3-3 4.5-.5 8M18 4c2.5 2.5-2.5 4-.5 7" fill="none" stroke="#f0883e" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M6 14h16v6a7 7 0 0 1-7 7h-2a7 7 0 0 1-7-7z" fill="#e8553a" />
+      <path d="M22 15.5h2a3 3 0 0 1 0 6h-2.4" fill="none" stroke="#f0883e" strokeWidth="2" strokeLinecap="round" />
+      <path d="M8 28.5h14" stroke="#4a9be8" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  ),
   azure: (
     <svg viewBox="0 0 32 32" aria-hidden="true">
       <defs>

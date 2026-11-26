@@ -13,7 +13,7 @@ export default function HomePanels() {
         <h2 id="home-about-title" className="d-title">About Me</h2>
         <p>
           A passionate Software Developer with a strong foundation in Computer Science and Physics,
-          specialising in Mendix, React and Azure. I thrive on solving complex problems and building
+          specialising in Mendix, Java, React and Azure. I thrive on solving complex problems and building
           scalable solutions.
         </p>
         <Link to="/about" className="d-pill-link">Learn More <ArrowRight size={14} aria-hidden="true" /></Link>

@@ -48,6 +48,7 @@ export const featuredProjects = [
 export const techStrip = [
   { id: 'mendix', name: 'Mendix', note: 'Advanced Developer' },
   { id: 'react', name: 'React', note: 'Frontend Expert' },
+  { id: 'java', name: 'Java', note: 'Backend Developer' },
   { id: 'azure', name: 'Azure', note: 'Cloud Ready' },
   { id: 'python', name: 'Python', note: 'Developer' },
   { id: 'power', name: 'Power Platform', note: 'Automate & Build' },
@@ -58,6 +59,7 @@ export const techStrip = [
 export const skillLevels = [
   { name: 'Mendix', level: 95 },
   { name: 'React', level: 90 },
+  { name: 'Java', level: 85 },
   { name: 'Azure', level: 88 },
   { name: 'Python', level: 80 },
   { name: 'Agile & Scrum', level: 92 },
