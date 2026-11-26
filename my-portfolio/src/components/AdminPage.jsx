@@ -11,19 +11,27 @@ const blankCertification = () => ({ title: '', label: '', code: '', description:
 const slugify = (value) => value.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'item'
 
 function AdminLogin() {
-  const [email, setEmail] = useState(adminEmail)
-  const [password, setPassword] = useState('')
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
 
-  async function signIn(event) {
-    event.preventDefault()
+  async function signInWithGoogle() {
     setBusy(true)
     setError('')
     try {
-      await firebaseAuth.signInWithEmailAndPassword(email.trim(), password)
+      const provider = new window.firebase.auth.GoogleAuthProvider()
+      // Let Google reuse the browser's active account when possible, and show
+      // its account chooser when the user has multiple signed-in accounts.
+      await firebaseAuth.signInWithPopup(provider)
     } catch (err) {
-      setError(err.code === 'auth/invalid-credential' ? 'Email or password is incorrect.' : err.message)
+      if (err.code === 'auth/popup-closed-by-user') {
+        setError('The Google sign-in window was closed before authentication finished.')
+      } else if (err.code === 'auth/popup-blocked') {
+        setError('Your browser blocked the Google sign-in window. Allow pop-ups for this site and try again.')
+      } else if (err.code === 'auth/operation-not-allowed') {
+        setError('Google sign-in is not enabled yet. Enable Google under Firebase Authentication → Sign-in method.')
+      } else {
+        setError(err.message || 'Google sign-in could not be completed.')
+      }
     } finally {
       setBusy(false)
     }
@@ -31,17 +39,17 @@ function AdminLogin() {
 
   return (
     <div className="admin-login-wrap">
-      <form className="admin-login" onSubmit={signIn}>
+      <div className="admin-login">
         <span className="admin-icon"><ShieldCheck size={26} /></span>
         <p className="admin-eyebrow">PORTFOLIO CONTROL CENTRE</p>
-        <h1>Admin sign in</h1>
-        <p className="admin-muted">Sign in with the owner account to manage public portfolio content.</p>
-        <label>Email address<input type="email" autoComplete="username" value={email} onChange={(event) => setEmail(event.target.value)} required /></label>
-        <label>Password<input type="password" autoComplete="current-password" value={password} onChange={(event) => setPassword(event.target.value)} required /></label>
+        <h1>Welcome back</h1>
+        <p className="admin-muted">Continue with the Google account already signed in to this browser.</p>
         {error && <p className="admin-error" role="alert">{error}</p>}
-        <button className="button primary admin-submit" type="submit" disabled={busy}>{busy ? 'Signing in…' : 'Sign in securely'}</button>
-        <p className="admin-muted admin-login-note">The admin account must first be created in Firebase Authentication.</p>
-      </form>
+        <button className="button primary admin-submit" type="button" onClick={signInWithGoogle} disabled={busy}>
+          {busy ? 'Connecting to Google…' : 'Continue with Google'}
+        </button>
+        <p className="admin-muted admin-login-note">Only the authorised portfolio owner account can access the content manager.</p>
+      </div>
     </div>
   )
 }
