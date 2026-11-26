@@ -18,6 +18,10 @@ export const firebaseAuth = firebaseApp ? firebaseApp.auth() : null
 export const firebaseDb = firebaseApp ? firebaseApp.firestore() : null
 export const firebaseStorage = firebaseApp && config.storageBucket ? firebaseApp.storage() : null
 export const firebaseStorageReady = Boolean(firebaseStorage)
+// Firebase Performance Monitoring is available in supported browser environments over HTTPS.
+export const firebasePerformance = firebaseApp && firebaseSdk.performance
+  ? firebaseSdk.performance(firebaseApp)
+  : null
 
 if (firebaseDb) {
   firebaseDb.settings({ ignoreUndefinedProperties: true })
