@@ -12,7 +12,6 @@ export default function Contact() {
         <div className="contact-links" aria-label="Contact and professional links">
           <a href={`mailto:${profile.email}`}>Email Anele</a>
           <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn profile ↗</a>
-          <a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub profile ↗</a>
           <a href={profile.portfolio} target="_blank" rel="noopener noreferrer">Portfolio website ↗</a>
         </div>
       </div>
