@@ -1,87 +1,39 @@
 # Anele Simbela | Software Developer Portfolio
 
-A responsive, frontend-only professional portfolio built with React 19 and Vite. The site presents selected software projects, technical capabilities, professional experience, education and contact information.
+This directory contains the React 19 + Vite application deployed to [portfolio-27b98.web.app](https://portfolio-27b98.web.app/).
 
-- **Production website:** https://portfolio-27b98.web.app/
-- **Source repository:** https://github.com/FABRICADO08/Portfolio
-- **Technology stack:** React, JavaScript, React Router, Vite, CSS, Tailwind CSS 4 and Lucide React
-- **Hosting and delivery:** Firebase Hosting with GitHub Actions
+For repository overview, features, local setup, quality checks, Firebase configuration, deployment, architecture and security guidance, see the [root README](../README.md).
 
-## Application features
+## Quick start
 
-- Professional profile and selected project portfolio
-- Dedicated About, Projects, Skills, Experience and Contact routes
-- Source-controlled content with no runtime database dependency
-- Responsive layouts and keyboard-accessible navigation
-- Direct email and LinkedIn contact options
-- Firebase Hosting rewrite for client-side route handling
-- Automated linting and production-build checks
-
-## Architecture
-
-This repository contains a static React frontend. It intentionally does not include a custom backend, database, authentication service or administration dashboard. Portfolio content is maintained in source control and published through the deployment workflow.
-
-Never commit credentials, private keys, access tokens or confidential employer information. Deployment credentials must be stored as protected GitHub Actions secrets.
-
-## Local development
-
-**Requirements:** Node.js 22 and npm.
+Requirements: Node.js 22 and npm.
 
 ```bash
-cd my-portfolio
 npm ci
 npm run dev
 ```
 
-## Quality assurance
+## Available scripts
 
-Run the following checks before submitting changes:
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the Vite development server |
+| `npm run lint` | Run ESLint |
+| `npm run build` | Create the production build in `dist/` |
+| `npm run preview` | Preview the production build locally |
 
-```bash
-npm run lint
-npm run build
-npm run preview
-```
+## Application source
 
-GitHub Actions runs ESLint and the Vite production build for relevant pull requests and pushes to the main branch.
+- `src/app/` — React application entry point and routes.
+- `src/components/` — public pages, reusable components and admin content manager.
+- `src/context/` — shared Firestore/source-content data provider.
+- `src/data/portfolioData.js` — source-controlled fallback projects, certifications, skills, experience and profile content.
+- `src/firebase/` — Firebase app, Authentication, Firestore, Storage and Performance Monitoring initialisation.
+- `src/utils/generateCV.js` — generates a downloadable CV from current portfolio data.
+- `public/` — static images, icons and search-engine files.
 
-## Content management
+## Firebase-backed content
 
-Update `src/data/portfolioData.js` to maintain:
+The private `/admin` page uses Google Authentication and supports managing projects and certifications in Firestore. Public pages switch to Firestore content after the one-time **Publish existing content** action has initialised the content collections. Until then, the source-controlled data is used.
 
-- Project titles, summaries, technology stacks and verified links
-- Technical skills
-- Certification titles, descriptions and image paths
-
-Place public assets in `public/` and reference them with root-relative paths, such as `/img/profile.png`. Publish only accurate credentials and approved project information. Omit confidential details relating to employer systems, internal processes and organisation data.
-
-## Repository structure
-
-```text
-Portfolio/
-├── .github/
-│   └── workflows/
-│       ├── portfolio-checks.yml
-│       └── deploy-firebase.yml
-├── firebase.json
-└── my-portfolio/
-    ├── public/
-    │   ├── img/
-    │   ├── robots.txt
-    │   └── sitemap.xml
-    ├── src/
-    │   ├── app/
-    │   ├── components/
-    │   ├── data/
-    │   └── styles/
-    ├── index.html
-    ├── package.json
-    └── vite.config.js
-```
-
-## Maintainer
-
-**Anele Simbela** | Software Developer
-
-- **GitHub:** https://github.com/FABRICADO08
-- **LinkedIn:** https://www.linkedin.com/in/anele-simbela-2202b9349/
+Read [the Firebase admin setup guide](../docs/firebase-admin-setup.md) before configuring or using the admin page. Firebase security rules in the repository must be published separately from Hosting.
