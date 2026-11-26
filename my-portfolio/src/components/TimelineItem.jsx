@@ -1,14 +1,5 @@
 import { certifications, education, experience } from '../data/portfolioData'
 
-function OrganisationMark({ src, name, variant = '' }) {
-  return (
-    <span className={`timeline-entity-badge ${variant}`}>
-      <img className="timeline-entity-logo" src={src} alt="" loading="lazy" />
-      <span>{name}</span>
-    </span>
-  )
-}
-
 export default function Timeline() {
   return (
     <section id="timeline" className="timeline-page content-width" aria-label="Experience and education">
@@ -19,7 +10,7 @@ export default function Timeline() {
             <li className="experience-item" key={item.role}>
               <p className="experience-date">{item.dates}</p>
               <h3>{item.role}</h3>
-              <OrganisationMark src={item.logo} name={item.organisation} />
+              <span className="timeline-entity-badge">{item.organisation}</span>
               <p>{item.detail}</p>
             </li>
           ))}
@@ -32,7 +23,7 @@ export default function Timeline() {
             <article className="education-card" key={item.qualification}>
               <p className="experience-date">{item.dates}</p>
               <h3>{item.qualification}</h3>
-              <OrganisationMark src={item.logo} name={item.institution} variant="education-entity-badge" />
+              <span className="timeline-entity-badge education-entity-badge">{item.institution}</span>
             </article>
           ))}
         </div>
