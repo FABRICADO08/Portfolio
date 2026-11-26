@@ -2,6 +2,9 @@ import { useEffect } from 'react'
 import { Link, Route, Routes, useLocation } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
+import FeaturedProjects from '../components/FeaturedProjects'
+import HomePanels from '../components/HomePanels'
+import Certifications from '../components/Certifications'
 import About from '../components/About'
 import Skills from '../components/Skills'
 import Projects from '../components/Projects'
@@ -26,6 +29,7 @@ const pageMeta = {
   '/projects': ['Projects', 'Explore Anele Simbela’s selected software projects, including Android development, React applications and enterprise Mendix solutions.'],
   '/about': ['About', 'Learn about Anele Simbela’s software development background, experience and approach to building practical digital solutions.'],
   '/skills': ['Skills', 'Explore Anele Simbela’s technical skills across Mendix, React, TypeScript, Kotlin, cloud technologies, APIs and agile delivery.'],
+  '/certifications': ['Certifications', 'Microsoft Azure, CompTIA Security+, Power Platform and Mendix credentials held by Anele Simbela.'],
   '/contact': ['Contact', 'Get in touch with Anele Simbela about software development opportunities, collaboration and technical work.'],
   '/timeline': ['Experience & Education', 'View Anele Simbela’s professional experience and education timeline.'],
 }
@@ -77,7 +81,8 @@ export default function App() {
       <main id="main-content" tabIndex={-1} className="main-content">
         {pageHeadings[pathname] && <h1 className="content-width page-title">{pageHeadings[pathname]}</h1>}
         <Routes>
-          <Route path="/" element={<><Hero /><Projects /><About /><Skills /><Contact /></>} />
+          <Route path="/" element={<><Hero /><FeaturedProjects /><HomePanels /></>} />
+          <Route path="/certifications" element={<Certifications />} />
           <Route path="/timeline" element={<Timeline />} />
           <Route path="/about" element={<About />} />
           <Route path="/projects" element={<Projects />} />
