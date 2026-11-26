@@ -1,7 +1,9 @@
-import { projects } from '../data/portfolioData'
+import { usePortfolioData } from '../context/PortfolioDataContext'
 import ProjectCard from './ProjectCard'
 
 export default function Projects() {
+  const { projects } = usePortfolioData()
+
   return (
     <section id="projects" className="section content-width" aria-labelledby="projects-heading">
       <div className="projects-section-heading">
@@ -15,6 +17,7 @@ export default function Projects() {
       <div className="project-grid">
         {projects.map((project) => <ProjectCard key={project.id} {...project} />)}
       </div>
+      {!projects.length && <p className="admin-muted">Projects will appear here when published.</p>}
     </section>
   )
 }

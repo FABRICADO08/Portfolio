@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, ArrowUp, Github, Linkedin, Mail, Send } from 'lucide-react'
-import { certifications, featuredCertificationIds, profile, skillLevels } from '../data/portfolioData'
-
-const featuredCerts = featuredCertificationIds
-  .map((id) => certifications.find((cert) => cert.id === id))
-  .filter(Boolean)
+import { featuredCertificationIds, profile, skillLevels } from '../data/portfolioData'
+import { usePortfolioData } from '../context/PortfolioDataContext'
 
 export default function HomePanels() {
+  const { certifications } = usePortfolioData()
+  const featuredCerts = certifications.filter((cert) => cert.featured ?? featuredCertificationIds.includes(cert.id)).slice(0, 4)
+
   return (
     <section className="content-width d-panels" aria-label="Profile overview">
       <article className="d-panel d-about" aria-labelledby="home-about-title">
@@ -26,14 +26,7 @@ export default function HomePanels() {
           {skillLevels.map((skill) => (
             <li key={skill.name}>
               <span>{skill.name}</span>
-              <div
-                className="d-bar"
-                role="progressbar"
-                aria-label={`${skill.name} proficiency`}
-                aria-valuenow={skill.level}
-                aria-valuemin={0}
-                aria-valuemax={100}
-              ><i style={{ width: `${skill.level}%` }} /></div>
+              <div className="d-bar" role="progressbar" aria-label={`${skill.name} proficiency`} aria-valuenow={skill.level} aria-valuemin={0} aria-valuemax={100}><i style={{ width: `${skill.level}%` }} /></div>
               <b>{skill.level}%</b>
             </li>
           ))}
@@ -45,19 +38,17 @@ export default function HomePanels() {
         <ul className="d-cert-list">
           {featuredCerts.map((cert) => (
             <li key={cert.id}>
-              <img src={cert.image} alt="" loading="lazy" width="36" height="36" />
-              <span>{cert.label}{cert.code && <><br />{cert.code}</>}</span>
+              <img src={cert.image || '/img/AZ-900.png'} alt="" loading="lazy" width="36" height="36" />
+              <span>{cert.label || cert.title}{cert.code && <><br />{cert.code}</>}</span>
             </li>
           ))}
         </ul>
+        <Link to="/certifications" className="d-panel-more">All certifications <ArrowRight size={13} /></Link>
       </article>
 
       <article className="d-panel d-contact" aria-labelledby="home-contact-title">
         <h2 id="home-contact-title" className="d-title">Get In Touch</h2>
-        <div className="d-contact-row">
-          <Mail size={44} strokeWidth={1.4} aria-hidden="true" />
-          <p>Let’s collaborate on your next big idea.</p>
-        </div>
+        <div className="d-contact-row"><Mail size={44} strokeWidth={1.4} aria-hidden="true" /><p>Let’s collaborate on your next big idea.</p></div>
         <Link to="/contact" className="button primary d-send">Send Message <Send size={15} aria-hidden="true" /></Link>
         <div className="d-socials">
           <a href={profile.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)"><Github size={22} /></a>
