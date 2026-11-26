@@ -1,3 +1,4 @@
+import { Building2, GraduationCap } from 'lucide-react'
 import { certifications, education, experience } from '../data/portfolioData'
 
 export default function Timeline() {
@@ -6,13 +7,13 @@ export default function Timeline() {
       <section className="timeline-section" aria-labelledby="experience-heading">
         <h2 id="experience-heading">Professional experience</h2>
         <ol className="experience-list">
-          {experience.map((item) => <li className="experience-item" key={item.role}><p className="experience-date">{item.dates}</p><h3>{item.role}</h3><p className="experience-organisation">{item.organisation}</p><p>{item.detail}</p></li>)}
+          {experience.map((item) => <li className="experience-item" key={item.role}><p className="experience-date">{item.dates}</p><h3>{item.role}</h3><span className="timeline-entity-badge"><Building2 size={14} aria-hidden="true" />{item.organisation}</span><p>{item.detail}</p></li>)}
         </ol>
       </section>
       <section className="timeline-section" aria-labelledby="education-heading">
         <h2 id="education-heading">Education</h2>
         <div className="education-grid">
-          {education.map((item) => <article className="education-card" key={item.qualification}><p className="experience-date">{item.dates}</p><h3>{item.qualification}</h3><p>{item.institution}</p></article>)}
+          {education.map((item) => <article className="education-card" key={item.qualification}><p className="experience-date">{item.dates}</p><h3>{item.qualification}</h3><span className="timeline-entity-badge education-entity-badge"><GraduationCap size={15} aria-hidden="true" />{item.institution}</span></article>)}
         </div>
       </section>
       <section className="timeline-section" aria-labelledby="certifications-heading">
