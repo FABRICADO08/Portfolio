@@ -1,0 +1,29 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isPortfolioOwner() {
+      return request.auth != null
+        && request.auth.token.email == 'anelefabricado@gmail.com';
+    }
+
+    match /projects/{projectId} {
+      allow read: if true;
+      allow create, update, delete: if isPortfolioOwner();
+    }
+
+    match /certifications/{certificationId} {
+      allow read: if true;
+      allow create, update, delete: if isPortfolioOwner();
+    }
+
+    match /settings/{settingId} {
+      allow read: if true;
+      allow create, update, delete: if isPortfolioOwner();
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

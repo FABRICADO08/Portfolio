@@ -12,6 +12,7 @@ import Contact from '../components/Contact'
 import Footer from '../components/Footer'
 import PageHero from '../components/PageHero'
 import Timeline from '../components/TimelineItem'
+import AdminPage from '../components/AdminPage'
 
 const SITE_URL = 'https://portfolio-27b98.web.app'
 
@@ -33,6 +34,7 @@ const pageMeta = {
   '/certifications': ['Certifications', 'Microsoft Azure, CompTIA Security+, Power Platform and Mendix credentials held by Anele Simbela.'],
   '/contact': ['Contact', 'Get in touch with Anele Simbela about software development opportunities, collaboration and technical work.'],
   '/timeline': ['Experience & Education', 'View Anele Simbela’s professional experience and education timeline.'],
+  '/admin': ['Admin', 'Private portfolio content management.'],
 }
 const pageHeroes = {
   '/about': { kicker: 'About me', title: 'About', accent: 'Anele', sub: 'Software developer, problem solver and lifelong learner from South Africa.' },
@@ -65,7 +67,7 @@ export default function App() {
     const canonicalUrl = `${SITE_URL}${pathname === '/' ? '/' : pathname}`
     document.title = pageTitle
     setMeta('name', 'description', description)
-    setMeta('name', 'robots', isKnownPage ? 'index, follow' : 'noindex, follow')
+    setMeta('name', 'robots', pathname === '/admin' ? 'noindex, nofollow' : isKnownPage ? 'index, follow' : 'noindex, follow')
     setMeta('property', 'og:title', pageTitle)
     setMeta('property', 'og:description', description)
     setMeta('property', 'og:url', canonicalUrl)
@@ -95,6 +97,7 @@ export default function App() {
           <Route path="/projects" element={<Projects />} />
           <Route path="/skills" element={<Skills />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/admin" element={<AdminPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
