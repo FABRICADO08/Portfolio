@@ -212,7 +212,7 @@ export default function AdminPage() {
         }
       }
 
-      await firebaseDb.collection(collectionName).doc(recordId).set(data)
+      await firebaseDb.collection(collectionName).doc(recordId).set(data, { merge: true })
       if (editing?.imagePath && editing.imagePath !== image.imagePath) {
         await firebaseStorage?.ref().child(editing.imagePath).delete().catch(() => {})
       }
