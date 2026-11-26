@@ -164,12 +164,6 @@ export default function AdminPage() {
     let uploadedPath = ''
     try {
       if (!firebaseDb) throw new Error('Firebase is not configured yet. Complete the setup in docs/firebase-admin-setup.md.')
-      // An empty certification image URL is valid. Validate only when a value is supplied.
-      if (tab === 'certifications' && form.image.trim()) {
-        let parsedImageUrl
-        try { parsedImageUrl = new URL(form.image.trim()) } catch { throw new Error('Enter a valid image URL or leave the image URL empty.') }
-        if (!['http:', 'https:'].includes(parsedImageUrl.protocol)) throw new Error('Image URL must start with http:// or https://, or be left empty.')
-      }
       const baseId = editing?.id || slugify(tab === 'projects' ? form.title : form.title)
       let recordId = baseId
       if (!editing) {
@@ -206,8 +200,8 @@ export default function AdminPage() {
           label: (form.label || form.title).trim(),
           code: form.code.trim(),
           description: form.description.trim(),
-          image: image.image,
-          imagePath: image.imagePath,
+          image: image.image || '',
+          imagePath: image.imagePath || '',
           credentialUrl: form.credentialUrl.trim(),
           issuedAt: form.issuedAt,
           expiryDate: form.noExpiry ? '' : form.expiryDate,
