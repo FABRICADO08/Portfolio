@@ -64,3 +64,5 @@ The Firestore and Storage rules are included in this repository. Publish them in
 - `settings/content`: `initialized: true` marks the Firestore collections as the source of truth, including when a collection is intentionally empty.
 
 The website never exposes an account creation route. Firestore and Storage rules enforce owner-only writes independently of the UI.
+
+The admin route is intentionally omitted from the public navigation; open the `/admin` path directly when you need to manage content.
