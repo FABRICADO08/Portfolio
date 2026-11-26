@@ -6,9 +6,32 @@ import { adminEmail, firebaseAuth, firebaseDb, firebaseReady, firebaseStorage, f
 import { usePortfolioData } from '../context/PortfolioDataContext'
 import '../styles/admin.css'
 
-const blankProject = () => ({ title: '', description: '', tech: '', github: '', live: '', image: '', summary: '', tags: '', featured: true, art: 'code' })
-const blankCertification = () => ({ title: '', label: '', code: '', description: '', image: '', credentialUrl: '', issuedAt: '', featured: true })
+const TECHNOLOGY_OPTIONS = ['Mendix', 'React', 'TypeScript', 'JavaScript', 'Java', 'Python', 'Kotlin', 'Android', 'Jetpack Compose', 'Vite', 'HTML', 'CSS', 'SQL', 'PostgreSQL', 'Firebase', 'Microsoft Azure', 'REST APIs', 'FullCalendar', 'Microsoft 365', 'Docker', 'Git', 'Power Platform', 'Node.js', 'Spring Boot']
+const TAG_OPTIONS = ['Web application', 'Mobile application', 'Enterprise', 'Low-code', 'Frontend', 'Backend', 'Full-stack', 'Cloud', 'Security', 'Cybersecurity', 'Automation', 'Analytics', 'Finance', 'Calendar', 'Collaboration', 'API integration', 'Open source', 'Personal project']
+const blankProject = () => ({ title: '', description: '', tech: [], github: '', live: '', image: '', summary: '', tags: [], featured: true, art: 'code' })
+const blankCertification = () => ({ title: '', label: '', code: '', description: '', image: '', credentialUrl: '', issuedAt: '', expiryDate: '', noExpiry: true, featured: true })
 const slugify = (value) => value.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'item'
+
+function MultiSelect({ label, name, options, value, onChange }) {
+  const selected = Array.isArray(value) ? value : String(value || '').split(',').map((item) => item.trim()).filter(Boolean)
+  const [open, setOpen] = useState(false)
+  const available = [...new Set([...options, ...selected])].sort((a, b) => a.localeCompare(b))
+  function toggle(option) {
+    onChange(name, selected.includes(option) ? selected.filter((item) => item !== option) : [...selected, option])
+  }
+  return (
+    <div className="admin-multiselect">
+      <span className="admin-field-label">{label}</span>
+      <button type="button" className="admin-multiselect-trigger" aria-expanded={open} onClick={() => setOpen((current) => !current)}>
+        <span>{selected.length ? selected.join(', ') : 'Choose one or more…'}</span><span aria-hidden="true">▾</span>
+      </button>
+      {open && <div className="admin-multiselect-menu">
+        {available.map((option) => <label key={option} className="admin-option"><input type="checkbox" checked={selected.includes(option)} onChange={() => toggle(option)} />{option}</label>)}
+      </div>}
+      {selected.length > 0 && <p className="admin-selected-count">{selected.length} selected</p>}
+    </div>
+  )
+}
 
 function AdminLogin() {
   const [busy, setBusy] = useState(false)
@@ -104,10 +127,14 @@ export default function AdminPage() {
     setEditing(item)
     setImageFile(null)
     setForm(tab === 'projects'
-      ? { ...blankProject(), ...item, tech: item.tech || '', summary: item.card?.summary || item.description || '', tags: (item.card?.tags || []).join(', '), featured: item.featured ?? Boolean(item.card) }
-      : { ...blankCertification(), ...item, featured: item.featured ?? true })
+      ? { ...blankProject(), ...item, tech: Array.isArray(item.tech) ? item.tech : String(item.tech || '').split(',').map((value) => value.trim()).filter(Boolean), summary: item.card?.summary || item.description || '', tags: Array.isArray(item.card?.tags) ? item.card.tags : [], featured: item.featured ?? Boolean(item.card) }
+      : { ...blankCertification(), ...item, issuedAt: /^\d{4}-\d{2}-\d{2}$/.test(item.issuedAt || '') ? item.issuedAt : '', expiryDate: item.expiryDate || '', noExpiry: item.noExpiry ?? !item.expiryDate, featured: item.featured ?? true })
     setError('')
     setNotice('')
+  }
+
+  function updateMultiField(name, value) {
+    setForm((current) => ({ ...current, [name]: value }))
   }
 
   function updateField(event) {
@@ -150,12 +177,12 @@ export default function AdminPage() {
       let data
 
       if (tab === 'projects') {
-        const tags = form.tags.split(',').map((tag) => tag.trim()).filter(Boolean)
+        const tags = form.tags
         data = {
           id: recordId,
           title: form.title.trim(),
           description: form.description.trim(),
-          tech: form.tech.trim(),
+          tech: form.tech,
           github: form.github.trim(),
           live: form.live.trim(),
           image: image.image,
@@ -176,7 +203,9 @@ export default function AdminPage() {
           image: image.image,
           imagePath: image.imagePath,
           credentialUrl: form.credentialUrl.trim(),
-          issuedAt: form.issuedAt.trim(),
+          issuedAt: form.issuedAt,
+          expiryDate: form.noExpiry ? '' : form.expiryDate,
+          noExpiry: Boolean(form.noExpiry),
           featured: Boolean(form.featured),
           order,
           updatedAt: firebaseSdkTimestamp(),
@@ -249,7 +278,7 @@ export default function AdminPage() {
   }
 
   if (!firebaseReady) {
-    return <section className="admin-page content-width"><div className="admin-notice error"><strong>Firebase is not configured.</strong><p>Add the Firebase web app settings as GitHub repository variables, then redeploy. Follow the setup guide linked below.</p><a href="https://github.com/FABRICADO08/Portfolio/blob/main/docs/firebase-admin-setup.md" target="_blank" rel="noreferrer">Open Firebase setup guide ↗</a></div></section>
+    return <section className="admin-page content-width"><div className="admin-notice error"><strong>Firebase is not configured.</strong><p>Add the Firebase web app settings as GitHub Actions secrets, then redeploy. Follow the setup guide linked below.</p><a href="https://github.com/FABRICADO08/Portfolio/blob/main/docs/firebase-admin-setup.md" target="_blank" rel="noreferrer">Open Firebase setup guide ↗</a></div></section>
   }
   if (!authLoaded) return <section className="admin-page content-width"><p className="admin-muted">Checking admin session…</p></section>
   if (!user) return <AdminLogin />
@@ -297,9 +326,9 @@ export default function AdminPage() {
             {tab === 'projects' ? (
               <>
                 <label>Description<textarea name="description" value={form.description} onChange={updateField} rows="4" required maxLength={1200} /></label>
-                <label>Technologies (comma-separated)<input name="tech" value={form.tech} onChange={updateField} placeholder="React, Firebase, TypeScript" /></label>
+                <MultiSelect label="Technologies" name="tech" options={TECHNOLOGY_OPTIONS} value={form.tech} onChange={updateMultiField} />
                 <label>Featured card summary<input name="summary" value={form.summary} onChange={updateField} maxLength={180} /></label>
-                <label>Tags (comma-separated)<input name="tags" value={form.tags} onChange={updateField} placeholder="React, Web app" /></label>
+                <MultiSelect label="Tags" name="tags" options={TAG_OPTIONS} value={form.tags} onChange={updateMultiField} />
                 <div className="admin-two-fields"><label>GitHub URL<input name="github" type="url" value={form.github} onChange={updateField} /></label><label>Live URL<input name="live" type="url" value={form.live} onChange={updateField} /></label></div>
                 <label>Illustration style<select name="art" value={form.art} onChange={updateField}><option value="code">Code</option><option value="calendar">Calendar</option><option value="shield">Security</option><option value="chart">Analytics</option></select></label>
               </>
@@ -308,7 +337,10 @@ export default function AdminPage() {
                 <label>Display label<input name="label" value={form.label} onChange={updateField} placeholder="Microsoft Azure Developer" /></label>
                 <label>Certification code<input name="code" value={form.code} onChange={updateField} placeholder="(AZ-204)" /></label>
                 <label>Description<textarea name="description" value={form.description} onChange={updateField} rows="3" required maxLength={1000} /></label>
-                <div className="admin-two-fields"><label>Issue date<input name="issuedAt" value={form.issuedAt} onChange={updateField} placeholder="November 2026" /></label><label>Credential URL<input name="credentialUrl" type="url" value={form.credentialUrl} onChange={updateField} /></label></div>
+                <div className="admin-two-fields"><label>Issue date<input name="issuedAt" type="date" value={form.issuedAt} onChange={updateField} /></label><label>Credential URL<input name="credentialUrl" type="url" value={form.credentialUrl} onChange={updateField} /></label></div>
+                <label className="admin-check"><input type="checkbox" name="noExpiry" checked={Boolean(form.noExpiry)} onChange={updateField} /> This certification does not expire</label>
+                {!form.noExpiry && <label>Expiry date<input name="expiryDate" type="date" value={form.expiryDate} onChange={updateField} required min={form.issuedAt || undefined} /></label>}
+                {form.noExpiry ? <p className="admin-status-preview neutral">Status preview: No expiry</p> : form.expiryDate && <p className={`admin-status-preview ${new Date(form.expiryDate + 'T23:59:59') < new Date() ? 'expired' : (new Date(form.expiryDate + 'T23:59:59') - Date.now() <= 30 * 86400000 ? 'warning' : 'active')}`}>Status preview: {new Date(form.expiryDate + 'T23:59:59') < new Date() ? 'Expired' : (new Date(form.expiryDate + 'T23:59:59') - Date.now() <= 30 * 86400000 ? 'Expiring soon' : 'Active')}</p>}
               </>
             )}
             <label>Image URL<input name="image" type="url" value={form.image} onChange={updateField} placeholder="https://… (optional if uploading)" /></label>
