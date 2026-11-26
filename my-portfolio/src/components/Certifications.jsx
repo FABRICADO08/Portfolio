@@ -1,9 +1,9 @@
 import { usePortfolioData } from '../context/PortfolioDataContext'
 
 function getCertificationStatus(cert) {
-  if (cert.noExpiry || !cert.expiryDate) return { label: 'No expiry', className: 'neutral' }
+  if (cert.noExpiry || !cert.expiryDate) return { label: 'Active', className: 'active' }
   const expiry = new Date(`${cert.expiryDate}T23:59:59`)
-  if (Number.isNaN(expiry.getTime())) return { label: 'Date not set', className: 'neutral' }
+  if (Number.isNaN(expiry.getTime())) return { label: 'Active', className: 'active' }
   const remaining = expiry.getTime() - Date.now()
   if (remaining < 0) return { label: 'Expired', className: 'expired' }
   if (remaining <= 30 * 24 * 60 * 60 * 1000) return { label: 'Expiring soon', className: 'warning' }
@@ -30,9 +30,9 @@ export default function Certifications() {
               <div>
                 <h3>{cert.title}</h3>
                 <p>{cert.description}</p>
-                {(cert.issuedAt || cert.expiryDate) && <p className="certification-dates">
+                {(cert.issuedAt || cert.expiryDate || cert.noExpiry || !cert.expiryDate) && <p className="certification-dates">
                   {cert.issuedAt && <span>Issued: {formatDate(cert.issuedAt)}</span>}
-                  {cert.expiryDate && <span>Expires: {formatDate(cert.expiryDate)}</span>}
+                  <span>Expires: {cert.noExpiry || !cert.expiryDate ? 'No Expiry' : formatDate(cert.expiryDate)}</span>
                 </p>}
                 <span className={`certification-status ${status.className}`}>{status.label}</span>
                 {cert.credentialUrl && <a href={cert.credentialUrl} target="_blank" rel="noopener noreferrer">View credential ↗</a>}
